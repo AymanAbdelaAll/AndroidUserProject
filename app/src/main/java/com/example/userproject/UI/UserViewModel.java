@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class UserViewModel extends ViewModel {
     MutableLiveData<User> userMutableLiveData=new MutableLiveData<>();
     MutableLiveData<List<User>> usersMutableLiveData=new MutableLiveData<>();
-
+    
     public void getUser(int id,View view) {
 
         UserClient.getINSTANCE().getUser(id).enqueue(new Callback<User>() {
