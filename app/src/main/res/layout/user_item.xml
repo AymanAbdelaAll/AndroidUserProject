@@ -12,35 +12,35 @@
 
         <TextView
             android:id="@+id/userItem_id"
-            android:layout_width="wrap_content"
+            android:layout_width="1sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="id" />
 
         <TextView
             android:id="@+id/userItem_name"
-            android:layout_width="wrap_content"
+            android:layout_width="50sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Name" />
 
         <TextView
             android:id="@+id/userItem_username"
-            android:layout_width="wrap_content"
+            android:layout_width="50sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="UserName" />
 
         <TextView
             android:id="@+id/userItem_website"
-            android:layout_width="wrap_content"
+            android:layout_width="70sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Website" />
 
         <ImageButton
             android:id="@+id/userItem_showUser"
-            android:layout_width="wrap_content"
+            android:layout_width="25sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/showicone" />
