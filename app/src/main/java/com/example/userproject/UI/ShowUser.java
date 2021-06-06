@@ -23,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//TODO : naming convention  & its layout file
 public class ShowUser extends AppCompatActivity {
     UserViewModel userViewModel;
     TextView showUserId,showUserName,showUserUserName,showUserWebsite,showUserEmail,showUserPhone,
@@ -42,7 +43,12 @@ public class ShowUser extends AppCompatActivity {
         inFlateUser();
 
     }
+
+
+    //TODO : naming convention
     protected void inFlateUser(){
+
+
         showUserId = (TextView) findViewById(R.id.showUser_id);
         showUserName = (TextView) findViewById(R.id.showUser_name);
         showUserPhone = (TextView) findViewById(R.id.showUser_phone);
@@ -61,6 +67,7 @@ public class ShowUser extends AppCompatActivity {
         userViewModel.userMutableLiveData.observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
+                //TODO : refactor
                 showUserId.setText(user.getId() + "");
                 showUserName.setText(user.getName());
                 showUserUserName.setText(user.getUsername());
