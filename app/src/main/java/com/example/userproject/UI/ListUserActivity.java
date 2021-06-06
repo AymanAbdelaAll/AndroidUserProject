@@ -1,8 +1,6 @@
 package com.example.userproject.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,36 +17,36 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserHome extends AppCompatActivity {
-    UserViewModel userViewModel;
+public class ListUserActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_home);
-
-        userViewModel= ViewModelProviders.of(this).get(UserViewModel.class);
-        getUsers();
+        setContentView(R.layout.list_user_activity);
+        loadUsers();
     }
 
-    protected void getUsers() {
+    protected void loadUsers() {
         recyclerView=findViewById(R.id.recyclerView);
-        userViewModel.getUsers(recyclerView.getRootView());
-
-
 
         UserListAdapter adapter=new UserListAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-
-
-        userViewModel.usersMutableLiveData.observe(this, new Observer<List<User>>() {
+        UserClient.getINSTANCE().getUsers().enqueue(new Callback<List<User>>() {
             @Override
-            public void onChanged(List<User> users) {
-                adapter.setList(users);
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                adapter.setList(response.body());
+            }
+
+
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(recyclerView.getContext(),"OOPS There Is An problem ,Try Again .",Toast.LENGTH_LONG).show();;
             }
         });
+
     }
 
     }
