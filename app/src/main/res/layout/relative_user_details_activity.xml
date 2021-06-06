@@ -59,9 +59,7 @@
         android:layout_marginStart="9dp"
         android:layout_marginTop="102dp"
         android:gravity="center"
-        android:text="Name"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="9dp" />
+        android:text="Name" />
 
     <TextView
         android:id="@+id/showUser_name"
@@ -154,8 +152,7 @@
         android:layout_marginTop="227dp"
         android:gravity="center"
         android:text="Email"
-        android:layout_marginLeft="12dp"
-        android:layout_alignParentLeft="true" />
+        android:layout_marginLeft="12dp" />
 
     <TextView
         android:id="@+id/textView32"
@@ -190,23 +187,13 @@
         android:text="Company" />
 
     <LinearLayout
-        android:layout_width="407dp"
-        android:layout_height="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/showUser_phone"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="61dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="306dp"
         android:orientation="horizontal"
         android:weightSum="4"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="0dp">
+        android:layout_alignParentRight="true">
 
         <TextView
             android:id="@+id/textView34"
