@@ -31,7 +31,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_details_activity);
+        setContentView(R.layout.relative_user_details_activity);
         userProgressBar = (ProgressBar) findViewById(R.id.userDetails_loadingbar);
         bindViews();
         loadUser();
@@ -39,24 +39,24 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     protected void bindViews(){
-        showUserId = (TextView) findViewById(R.id.showUser_id);
-        showUserName = (TextView) findViewById(R.id.showUser_name);
-        showUserPhone = (TextView) findViewById(R.id.showUser_phone);
-        showUserUserName = (TextView) findViewById(R.id.showUser_username);
-        showUserEmail = (TextView) findViewById(R.id.showUser_email);
-        showUserWebsite = (TextView) findViewById(R.id.showUser_website);
+        showUserId = (TextView) this.findViewById(R.id.showUser_id);
+        showUserName = (TextView) this.findViewById(R.id.showUser_name);
+        showUserPhone = (TextView) this.findViewById(R.id.showUser_phone);
+        showUserUserName = (TextView) this.findViewById(R.id.showUser_username);
+        showUserEmail = (TextView) this.findViewById(R.id.showUser_email);
+        showUserWebsite = (TextView) this.findViewById(R.id.showUser_website);
 
-        showUserAddressStreet = (TextView) findViewById(R.id.showUser_street);
-        showUserAddressSuite = (TextView) findViewById(R.id.showUser_suite);
-        showUserAddressCity = (TextView) findViewById(R.id.showUser_city);
-        showUserAddressZipcode = (TextView) findViewById(R.id.showUser_zipcode);
-        showUserAddressGeo = (TextView) findViewById(R.id.showUser_geo);
+        showUserAddressStreet = (TextView) this.findViewById(R.id.showUser_street);
+        showUserAddressSuite = (TextView) this.findViewById(R.id.showUser_suite);
+        showUserAddressCity = (TextView) this.findViewById(R.id.showUser_city);
+        showUserAddressZipcode = (TextView) this.findViewById(R.id.showUser_zipcode);
+        showUserAddressGeo = (TextView) this.findViewById(R.id.showUser_geo);
 
-        showUserCompanyName = (TextView) findViewById(R.id.showUser_companyName);
-        showUserCompanyCatchphrase = (TextView) findViewById(R.id.showUser_catchphrase);
-        showUserCompanyBs = (TextView) findViewById(R.id.showUser_bs);
-        showUserAddressGeoView = (TextView) findViewById(R.id.showUser_geoView);
-        userProgressBar=(ProgressBar)findViewById(R.id.userDetails_loadingbar);
+        showUserCompanyName = (TextView) this.findViewById(R.id.showUser_companyName);
+        showUserCompanyCatchphrase = (TextView) this.findViewById(R.id.showUser_catchphrase);
+        showUserCompanyBs = (TextView) this.findViewById(R.id.showUser_bs);
+        showUserAddressGeoView = (TextView) this.findViewById(R.id.showUser_geoView);
+        userProgressBar=(ProgressBar)this.findViewById(R.id.userDetails_loadingbar);
     }
     private void loadUser() {
 
