@@ -31,7 +31,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.relative_user_details_activity);
+        setContentView(R.layout.user_details_activity);
         userProgressBar = (ProgressBar) findViewById(R.id.userDetails_loadingbar);
         bindViews();
         loadUser();
