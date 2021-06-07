@@ -22,54 +22,54 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserDetailsActivity extends AppCompatActivity {
-    TextView showUserId, showUserName, showUserUserName, showUserWebsite, showUserEmail, showUserPhone,
-            showUserAddressStreet, showUserAddressSuite, showUserAddressCity, showUserAddressZipcode,
-            showUserCompanyName, showUserCompanyCatchphrase, showUserCompanyBs, showUserAddressGeo,
-            showUserAddressGeoView;
-    ProgressBar userProgressBar;
+    TextView tvId, tvName, tvUserName, tvWebsite, tvEmail, tvPhone,
+            tvAddressStreet, tvAddressSuite, tvAddressCity, tvAddressZipcode,
+            tvCompanyName, tvCompanyCatchphrase, tvCompanyBs, tvAddressGeo,
+            tvAddressGeoView;
+    ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_details_activity);
-        userProgressBar = (ProgressBar) findViewById(R.id.userDetails_loadingbar);
+        setContentView(R.layout.activity_relative_user_details);
+        pbLoading = (ProgressBar) findViewById(R.id.userdetails_progress_loadingbar);
         bindViews();
         loadUser();
 
     }
 
     protected void bindViews(){
-        showUserId = (TextView) this.findViewById(R.id.showUser_id);
-        showUserName = (TextView) this.findViewById(R.id.showUser_name);
-        showUserPhone = (TextView) this.findViewById(R.id.showUser_phone);
-        showUserUserName = (TextView) this.findViewById(R.id.showUser_username);
-        showUserEmail = (TextView) this.findViewById(R.id.showUser_email);
-        showUserWebsite = (TextView) this.findViewById(R.id.showUser_website);
+        tvId = (TextView) this.findViewById(R.id.userdetails_text_id);
+        tvName = (TextView) this.findViewById(R.id.userdetails_text_name);
+        tvPhone = (TextView) this.findViewById(R.id.userdetails_text_phone);
+        tvUserName = (TextView) this.findViewById(R.id.userdetails_text_username);
+        tvEmail = (TextView) this.findViewById(R.id.userdetails_text_email);
+        tvWebsite = (TextView) this.findViewById(R.id.userdetails_text_website);
 
-        showUserAddressStreet = (TextView) this.findViewById(R.id.showUser_street);
-        showUserAddressSuite = (TextView) this.findViewById(R.id.showUser_suite);
-        showUserAddressCity = (TextView) this.findViewById(R.id.showUser_city);
-        showUserAddressZipcode = (TextView) this.findViewById(R.id.showUser_zipcode);
-        showUserAddressGeo = (TextView) this.findViewById(R.id.showUser_geo);
+        tvAddressStreet = (TextView) this.findViewById(R.id.userdetails_text_address_street);
+        tvAddressSuite = (TextView) this.findViewById(R.id.userdetails_text_address_suite);
+        tvAddressCity = (TextView) this.findViewById(R.id.userdetails_text_address_city);
+        tvAddressZipcode = (TextView) this.findViewById(R.id.userdetails_text_address_zipcode);
+        tvAddressGeo = (TextView) this.findViewById(R.id.userdetails_text_address_geo);
 
-        showUserCompanyName = (TextView) this.findViewById(R.id.showUser_companyName);
-        showUserCompanyCatchphrase = (TextView) this.findViewById(R.id.showUser_catchphrase);
-        showUserCompanyBs = (TextView) this.findViewById(R.id.showUser_bs);
-        showUserAddressGeoView = (TextView) this.findViewById(R.id.showUser_geoView);
-        userProgressBar=(ProgressBar)this.findViewById(R.id.userDetails_loadingbar);
+        tvCompanyName = (TextView) this.findViewById(R.id.userdetails_text_company_name);
+        tvCompanyCatchphrase = (TextView) this.findViewById(R.id.userdetails_text_company_catchphrase);
+        tvCompanyBs = (TextView) this.findViewById(R.id.userdetails_text_company_bs);
+        tvAddressGeoView = (TextView) this.findViewById(R.id.userdetails_text_address_geoView);
+        pbLoading=(ProgressBar)this.findViewById(R.id.userdetails_progress_loadingbar);
     }
     private void loadUser() {
 
         UserClient.getINSTANCE().getUser(1).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                userProgressBar.setVisibility(View.GONE);
+                pbLoading.setVisibility(View.GONE);
                 getRetriaveUserRequest(response.body());
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                userProgressBar.setVisibility(View.GONE);
+                pbLoading.setVisibility(View.GONE);
             getFaliarUserRequest();
 
             }
@@ -96,37 +96,37 @@ public class UserDetailsActivity extends AppCompatActivity {
     private void setAddressGeoViews(Address userAddress) {
         if (userAddress instanceof GeoAddress) {
             Geo userGeo = ((GeoAddress) userAddress).getGeo();
-            showUserAddressGeo.setText(userGeo.getLat() + " - " + userGeo.getLng());
+            tvAddressGeo.setText(userGeo.getLat() + " - " + userGeo.getLng());
         } else {
-            showUserAddressGeo.setVisibility(View.GONE);
-            showUserAddressGeoView.setVisibility(View.GONE);
+            tvAddressGeo.setVisibility(View.GONE);
+            tvAddressGeoView.setVisibility(View.GONE);
         }
     }
 
     private void setUserAddressViews(Address userAddress) {
-        showUserAddressStreet.setText(userAddress.getStreet());
-        showUserAddressSuite.setText(userAddress.getSuite());
-        showUserAddressCity.setText(userAddress.getCity());
-        showUserAddressZipcode.setText(userAddress.getZipcode());
+        tvAddressStreet.setText(userAddress.getStreet());
+        tvAddressSuite.setText(userAddress.getSuite());
+        tvAddressCity.setText(userAddress.getCity());
+        tvAddressZipcode.setText(userAddress.getZipcode());
     }
 
     private void setUserCompanyViews(Company userCompany) {
-        showUserCompanyBs.setText(userCompany.getBs());
-        showUserCompanyName.setText(userCompany.getName());
-        showUserCompanyCatchphrase.setText(userCompany.getCatchphrase());
+        tvCompanyBs.setText(userCompany.getBs());
+        tvCompanyName.setText(userCompany.getName());
+        tvCompanyCatchphrase.setText((userCompany.getCatchphrase()));
     }
 
     private void setUserViews(User userRespose) {
-        showUserId.setText(userRespose.getId() + "");
-        showUserName.setText(userRespose.getName());
-        showUserUserName.setText(userRespose.getUsername());
-        showUserPhone.setText(userRespose.getPhone());
-        showUserEmail.setText(userRespose.getEmail());
-       // showUserWebsite.setText(userRespose.getWebsite());
+        tvId.setText(userRespose.getId() + "");
+        tvName.setText(userRespose.getName());
+        tvUserName.setText(userRespose.getUsername());
+        tvPhone.setText(userRespose.getPhone());
+        tvEmail.setText(userRespose.getEmail());
+        tvWebsite.setText(userRespose.getWebsite());
     }
 
     protected void getFaliarUserRequest(){
-        Context context=this.findViewById(R.id.showUser_id).getContext();
+        Context context=this.findViewById(R.id.userdetails_text_id).getContext();
         Toast.makeText(context,"OOPS There Is An Problem ,Try Again .",Toast.LENGTH_LONG).show();
     }
 }

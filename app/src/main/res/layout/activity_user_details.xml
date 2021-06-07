@@ -10,9 +10,9 @@
     tools:context=".UI.UserDetailsActivity">
 
     <ProgressBar
-        android:id="@+id/userDetails_loadingbar"
+        android:id="@+id/userdetails_progress_loadingbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,11 +20,11 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/userdetails_image_userphoto"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_weight="1"
-            android:src="@drawable/userphoto_list_user" />
+            android:src="@drawable/ic_userphoto" />
     </LinearLayout>
 
     <View
@@ -49,7 +49,7 @@
             tools:layout_editor_absoluteY="29dp" />
 
         <TextView
-            android:id="@+id/showUser_id"
+            android:id="@+id/userdetails_text_id"
             android:layout_width="137dp"
             android:layout_height="30dp"
             android:layout_weight="3"
@@ -76,7 +76,7 @@
             tools:layout_editor_absoluteY="376dp" />
 
         <TextView
-            android:id="@+id/showUser_name"
+            android:id="@+id/userdetails_text_name"
             android:layout_width="138dp"
             android:layout_height="30dp"
             android:layout_weight="3"
@@ -103,7 +103,7 @@
             tools:layout_editor_absoluteY="108dp" />
 
         <TextView
-            android:id="@+id/showUser_username"
+            android:id="@+id/userdetails_text_username"
             android:layout_width="136dp"
             android:layout_height="30dp"
             android:layout_weight="3"
@@ -130,7 +130,7 @@
             tools:layout_editor_absoluteY="243dp" />
 
         <TextView
-            android:id="@+id/showUser_email"
+            android:id="@+id/userdetails_text_email"
             android:layout_width="142dp"
             android:layout_height="30dp"
             android:layout_weight="3"
@@ -157,7 +157,7 @@
             tools:layout_editor_absoluteY="202dp" />
 
         <TextView
-            android:id="@+id/showUser_phone"
+            android:id="@+id/userdetails_text_phone"
             android:layout_width="145dp"
             android:layout_height="30dp"
             android:layout_weight="3"
@@ -173,7 +173,7 @@
         android:background="@color/black" />
 
     <TextView
-        android:id="@+id/showUser_company"
+        android:id="@+id/userdetails_text_company"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:text="Company:"
@@ -197,7 +197,7 @@
             tools:layout_editor_absoluteY="70dp" />
 
         <TextView
-            android:id="@+id/showUser_companyName"
+            android:id="@+id/userdetails_text_company_name"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -224,7 +224,7 @@
             tools:layout_editor_absoluteY="333dp" />
 
         <TextView
-            android:id="@+id/showUser_catchphrase"
+            android:id="@+id/userdetails_text_company_catchphrase"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -251,7 +251,7 @@
             tools:layout_editor_absoluteY="416dp" />
 
         <TextView
-            android:id="@+id/showUser_bs"
+            android:id="@+id/userdetails_text_company_bs"
             android:layout_width="137dp"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -268,7 +268,7 @@
         android:background="@color/black" />
 
     <TextView
-        android:id="@+id/showUser_Address"
+        android:id="@+id/userdetails_text_address"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:text="Address:"
@@ -292,7 +292,7 @@
             tools:layout_editor_absoluteY="501dp" />
 
         <TextView
-            android:id="@+id/showUser_street"
+            android:id="@+id/userdetails_text_address_street"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -319,7 +319,7 @@
             tools:layout_editor_absoluteY="587dp" />
 
         <TextView
-            android:id="@+id/showUser_city"
+            android:id="@+id/userdetails_text_address_city"
             android:layout_width="134dp"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -346,7 +346,7 @@
             tools:layout_editor_absoluteY="544dp" />
 
         <TextView
-            android:id="@+id/showUser_suite"
+            android:id="@+id/userdetails_text_address_suite"
             android:layout_width="136dp"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -373,7 +373,7 @@
             tools:layout_editor_absoluteY="153dp" />
 
         <TextView
-            android:id="@+id/showUser_website"
+            android:id="@+id/userdetails_text_website"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -400,7 +400,7 @@
             tools:layout_editor_absoluteY="629dp" />
 
         <TextView
-            android:id="@+id/showUser_zipcode"
+            android:id="@+id/userdetails_text_address_zipcode"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_weight="3"
@@ -417,7 +417,7 @@
         android:weightSum="4">
 
         <TextView
-            android:id="@+id/showUser_geo"
+            android:id="@+id/userdetails_text_address_geo"
             android:layout_width="88dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
@@ -428,7 +428,7 @@
             tools:layout_editor_absoluteY="665dp" />
 
         <TextView
-            android:id="@+id/showUser_geoView"
+            android:id="@+id/userdetails_text_address_geoView"
             android:layout_width="138dp"
             android:layout_height="25dp"
             android:layout_weight="3"
