@@ -59,7 +59,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         pbLoading=(ProgressBar)this.findViewById(R.id.userdetails_progress_loadingbar);
     }
     private void loadUser() {
-
+        //TODO : here you can change the Id of user you want
         UserClient.getINSTANCE().getUser(1).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
