@@ -135,7 +135,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     @OnClick(R.id.userdetails_text_email)
     public void onEmailClicked(View view) {
-        Toast.makeText(this,"Email view Clicked .",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Email View Clicked .",Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
