@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UserClient {
     private final String URL="https://jsonplaceholder.typicode.com/";
     private UserInterface userInterface;
-    private static UserClient INSTANCE;//TODO : naming
+    private static UserClient instance ;
 
     public UserClient() {
         Retrofit retrofit=new Retrofit.Builder()
@@ -21,17 +21,16 @@ public class UserClient {
 
         userInterface=retrofit.create(UserInterface.class);
     }
-    //TODO: naming
-    public static UserClient getINSTANCE(){
-        if (INSTANCE==null)
-            INSTANCE=new UserClient();
-        return INSTANCE;
+    public static UserClient getInstance(){
+        if (instance ==null)
+            instance =new UserClient();
+        return instance ;
     }
     public Call<User> getUser(int id){
-        return getINSTANCE().userInterface.getUser(id);
+        return getInstance ().userInterface.getUser(id);
     }
 
     public Call<List<User>> getUsers(){
-        return getINSTANCE().userInterface.getUsers();
+        return getInstance ().userInterface.getUsers();
     }
 }

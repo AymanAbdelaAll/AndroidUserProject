@@ -1,4 +1,10 @@
-package com.example.userproject.POJO;
+package com.example.userproject;
+
+import com.example.userproject.POJO.Address;
+import com.example.userproject.POJO.Company;
+import com.example.userproject.POJO.Geo;
+import com.example.userproject.POJO.GeoAddress;
+import com.example.userproject.POJO.User;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
@@ -10,7 +16,6 @@ import java.util.Scanner;
  */
 public class Test {
 
-    //TODO : if needed move to test package
 
     private static ArrayList<Geo> geos=new ArrayList<Geo>(){{
         add(new Geo(-37.3159, 81.1496));

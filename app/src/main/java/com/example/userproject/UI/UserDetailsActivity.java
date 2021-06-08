@@ -18,54 +18,49 @@ import com.example.userproject.POJO.GeoAddress;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserDetailsActivity extends AppCompatActivity {
-    TextView tvId, tvName, tvUserName, tvWebsite, tvEmail, tvPhone,
-            tvAddressStreet, tvAddressSuite, tvAddressCity, tvAddressZipcode,
-            tvCompanyName, tvCompanyCatchphrase, tvCompanyBs, tvAddressGeo,
-            tvAddressGeoView;
-    ProgressBar pbLoading;
+    @BindView(R.id.userdetails_text_id) TextView tvId;
+    @BindView(R.id.userdetails_text_name) TextView tvName;
+    @BindView(R.id.userdetails_text_username) TextView tvUserName;
+    @BindView(R.id.userdetails_text_website) TextView tvWebsite;
+    @BindView(R.id.userdetails_text_email) TextView tvEmail;
+    @BindView(R.id.userdetails_text_phone) TextView tvPhone;
 
+    @BindView(R.id.userdetails_text_address_street) TextView tvAddressStreet;
+    @BindView(R.id.userdetails_text_address_suite) TextView tvAddressSuite;
+    @BindView(R.id.userdetails_text_address_city) TextView tvAddressCity;
+    @BindView(R.id.userdetails_text_address_zipcode) TextView tvAddressZipcode;
 
-    //    @BindView(R.id.userdetails_text_id)
-//    TextView tvId;
+    @BindView(R.id.userdetails_text_company_name) TextView tvCompanyName;
+    @BindView(R.id.userdetails_text_company_catchphrase) TextView tvCompanyCatchphrase;
+    @BindView(R.id.userdetails_text_company_bs) TextView tvCompanyBs;
+
+    @BindView(R.id.userdetails_text_address_geo) TextView tvAddressGeo;
+    @BindView(R.id.userdetails_text_address_geoView) TextView tvAddressGeoView;
+    @BindView(R.id.userdetails_progress_loadingbar) ProgressBar pbLoading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_constraint_user_details);
-        pbLoading = (ProgressBar) findViewById(R.id.userdetails_progress_loadingbar);//TODO : remove , duplicate
         bindViews();
         loadUser();
-
     }
 
     protected void bindViews() {
-        tvId = (TextView) this.findViewById(R.id.userdetails_text_id);
-        tvName = (TextView) this.findViewById(R.id.userdetails_text_name);
-        tvPhone = (TextView) this.findViewById(R.id.userdetails_text_phone);
-        tvUserName = (TextView) this.findViewById(R.id.userdetails_text_username);
-        tvEmail = (TextView) this.findViewById(R.id.userdetails_text_email);
-        tvWebsite = (TextView) this.findViewById(R.id.userdetails_text_website);
-
-        tvAddressStreet = (TextView) this.findViewById(R.id.userdetails_text_address_street);
-        tvAddressSuite = (TextView) this.findViewById(R.id.userdetails_text_address_suite);
-        tvAddressCity = (TextView) this.findViewById(R.id.userdetails_text_address_city);
-        tvAddressZipcode = (TextView) this.findViewById(R.id.userdetails_text_address_zipcode);
-        tvAddressGeo = (TextView) this.findViewById(R.id.userdetails_text_address_geo);
-
-        tvCompanyName = (TextView) this.findViewById(R.id.userdetails_text_company_name);
-        tvCompanyCatchphrase = (TextView) this.findViewById(R.id.userdetails_text_company_catchphrase);
-        tvCompanyBs = (TextView) this.findViewById(R.id.userdetails_text_company_bs);
-        tvAddressGeoView = (TextView) this.findViewById(R.id.userdetails_text_address_geoView);
-        pbLoading = (ProgressBar) this.findViewById(R.id.userdetails_progress_loadingbar);
+        ButterKnife.bind(this);
     }
 
     private void loadUser() {
         //here you can change the Id of user you want
-        UserClient.getINSTANCE().getUser(1).enqueue(new Callback<User>() {
+        UserClient.getInstance().getUser(1).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 hideLoading();
@@ -76,7 +71,6 @@ public class UserDetailsActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
                 hideLoading();
                 getFaliarUserRequest();
-
             }
         });
     }
@@ -105,8 +99,8 @@ public class UserDetailsActivity extends AppCompatActivity {
     private void setAddressGeoViews(Address userAddress) {
         if (userAddress instanceof GeoAddress) {
             Geo userGeo = ((GeoAddress) userAddress).getGeo();
-            String text = userGeo.getLat() + " - " + userGeo.getLng();
-            tvAddressGeo.setText(text); //TODO : refactor
+            String geoLatAndLng = userGeo.getLat() + " - " + userGeo.getLng();
+            tvAddressGeo.setText(geoLatAndLng);
         } else {
             tvAddressGeo.setVisibility(View.GONE);
             tvAddressGeoView.setVisibility(View.GONE);
@@ -136,18 +130,18 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     protected void getFaliarUserRequest() {
-//        Context context = this.findViewById(R.id.userdetails_text_id).getContext(); // TODO : no need u r already in context . activity extends context
         Toast.makeText(this, "OOPS There Is An Problem ,Try Again .", Toast.LENGTH_LONG).show();
     }
 
+    @OnClick(R.id.userdetails_text_email)
     public void onEmailClicked(View view) {
-        // email clicked toast
+        Toast.makeText(this,"Email view Clicked .",Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
-
-
+        intent.setType("message/rfc822");
+        String emailClicked=tvEmail.getText()+"";
+        intent.putExtra(Intent.EXTRA_EMAIL,emailClicked);
         startActivity(intent);
-        // send an email for whats given ( open mail app ) .
     }
 }
 

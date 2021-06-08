@@ -33,7 +33,7 @@ public class ListUserActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        UserClient.getINSTANCE().getUsers().enqueue(new Callback<List<User>>() {
+        UserClient.getInstance().getUsers().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 adapter.setList(response.body());

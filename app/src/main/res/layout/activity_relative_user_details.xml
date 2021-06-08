@@ -4,49 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO : how to relative ?-->
     <ProgressBar
         android:id="@+id/userdetails_progress_loadingbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageview"
         android:layout_width="104dp"
         android:layout_height="72dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginLeft="128dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginRight="161dp"
-        android:layout_marginBottom="14dp"
+
         android:src="@drawable/ic_userphoto" />
 
     <View
+        android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="91dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageview"
         android:background="@color/black" />
 
     <LinearLayout
+        android:id="@+id/linearlayout_user_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="96dp"
+        android:layout_below="@+id/line1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="0dp"
             android:orientation="horizontal"
             android:weightSum="5">
 
@@ -73,9 +66,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="0dp"
             android:orientation="horizontal"
             android:weightSum="5">
 
@@ -163,17 +153,19 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="202dp"
+        android:layout_below="@+id/linearlayout_user_details"
         android:background="@color/black" />
 
     <LinearLayout
+        android:id="@+id/linearlayout_company_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="209dp"
+        android:layout_below="@+id/line2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:orientation="vertical">
 
         <TextView
@@ -250,17 +242,21 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/line3"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="295dp"
+        android:layout_below="@+id/linearlayout_company_details"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:background="@color/black" />
 
     <LinearLayout
+        android:id="@+id/linearlayout_address_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="302dp"
+        android:layout_below="@id/line3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:orientation="vertical">
 
         <TextView
@@ -381,21 +377,21 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/line4"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="false"
-        android:layout_marginTop="427dp"
-        android:layout_marginBottom="376dp"
+        android:layout_below="@+id/linearlayout_address_details"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:background="@color/black" />
 
     <LinearLayout
+        android:id="@+id/linearlayout_user_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="false"
-        android:layout_marginTop="435dp"
-        android:layout_marginBottom="353dp"
+        android:layout_below="@+id/line4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:orientation="horizontal"
         android:weightSum="5">
 
@@ -403,9 +399,6 @@
             android:id="@+id/textView47"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="0dp"
             android:layout_weight="1"
             android:text="Email" />
 
@@ -413,12 +406,17 @@
             android:id="@+id/userdetails_text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginBottom="0dp"
             android:layout_weight="4"
             android:gravity="center"
             android:text="Email" />
     </LinearLayout>
+    <View
+        android:id="@+id/line5"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@+id/linearlayout_user_email"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/black" />
 
 </RelativeLayout>
