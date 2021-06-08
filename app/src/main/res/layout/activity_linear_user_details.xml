@@ -32,6 +32,7 @@
         android:layout_height="2dp"
         android:background="@color/black" />
 
+    <!-- TODO : how to center both items -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,23 +41,19 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="91dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="ID"
-            tools:layout_editor_absoluteX="72dp"
-            tools:layout_editor_absoluteY="29dp" />
+            android:text="ID" />
 
         <TextView
             android:id="@+id/userdetails_text_id"
-            android:layout_width="137dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="ID"
-            tools:layout_editor_absoluteX="248dp"
-            tools:layout_editor_absoluteY="29dp" />
+            android:text="ID" />
     </LinearLayout>
 
     <LinearLayout
@@ -75,6 +72,7 @@
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="376dp" />
 
+        <!-- TODO : no fixed numbers -->
         <TextView
             android:id="@+id/userdetails_text_name"
             android:layout_width="138dp"

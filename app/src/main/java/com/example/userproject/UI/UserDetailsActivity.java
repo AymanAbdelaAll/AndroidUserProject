@@ -3,6 +3,7 @@ package com.example.userproject.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -28,17 +29,20 @@ public class UserDetailsActivity extends AppCompatActivity {
             tvAddressGeoView;
     ProgressBar pbLoading;
 
+
+    //    @BindView(R.id.userdetails_text_id)
+//    TextView tvId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_constraint_user_details);
-        pbLoading = (ProgressBar) findViewById(R.id.userdetails_progress_loadingbar);
+        pbLoading = (ProgressBar) findViewById(R.id.userdetails_progress_loadingbar);//TODO : remove , duplicate
         bindViews();
         loadUser();
 
     }
 
-    protected void bindViews(){
+    protected void bindViews() {
         tvId = (TextView) this.findViewById(R.id.userdetails_text_id);
         tvName = (TextView) this.findViewById(R.id.userdetails_text_name);
         tvPhone = (TextView) this.findViewById(R.id.userdetails_text_phone);
@@ -56,28 +60,33 @@ public class UserDetailsActivity extends AppCompatActivity {
         tvCompanyCatchphrase = (TextView) this.findViewById(R.id.userdetails_text_company_catchphrase);
         tvCompanyBs = (TextView) this.findViewById(R.id.userdetails_text_company_bs);
         tvAddressGeoView = (TextView) this.findViewById(R.id.userdetails_text_address_geoView);
-        pbLoading=(ProgressBar)this.findViewById(R.id.userdetails_progress_loadingbar);
+        pbLoading = (ProgressBar) this.findViewById(R.id.userdetails_progress_loadingbar);
     }
+
     private void loadUser() {
-        //TODO : here you can change the Id of user you want
+        //here you can change the Id of user you want
         UserClient.getINSTANCE().getUser(1).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                pbLoading.setVisibility(View.GONE);
+                hideLoading();
                 getRetriaveUserRequest(response.body());
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                pbLoading.setVisibility(View.GONE);
-            getFaliarUserRequest();
+                hideLoading();
+                getFaliarUserRequest();
 
             }
         });
     }
 
-    protected void getRetriaveUserRequest(User userRespose){
-        if (userRespose!=null) {
+    private void hideLoading() {
+        pbLoading.setVisibility(View.GONE);
+    }
+
+    protected void getRetriaveUserRequest(User userRespose) {
+        if (userRespose != null) {
             setUserViews(userRespose);
 
             Company userCompany = userRespose.getCompany();
@@ -87,7 +96,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             setUserAddressViews(userAddress);
 
             setAddressGeoViews(userAddress);
-        }else{
+        } else {
             getFaliarUserRequest();
         }
 
@@ -96,7 +105,8 @@ public class UserDetailsActivity extends AppCompatActivity {
     private void setAddressGeoViews(Address userAddress) {
         if (userAddress instanceof GeoAddress) {
             Geo userGeo = ((GeoAddress) userAddress).getGeo();
-            tvAddressGeo.setText(userGeo.getLat() + " - " + userGeo.getLng());
+            String text = userGeo.getLat() + " - " + userGeo.getLng();
+            tvAddressGeo.setText(text); //TODO : refactor
         } else {
             tvAddressGeo.setVisibility(View.GONE);
             tvAddressGeoView.setVisibility(View.GONE);
@@ -125,9 +135,19 @@ public class UserDetailsActivity extends AppCompatActivity {
         tvWebsite.setText(userRespose.getWebsite());
     }
 
-    protected void getFaliarUserRequest(){
-        Context context=this.findViewById(R.id.userdetails_text_id).getContext();
-        Toast.makeText(context,"OOPS There Is An Problem ,Try Again .",Toast.LENGTH_LONG).show();
+    protected void getFaliarUserRequest() {
+//        Context context = this.findViewById(R.id.userdetails_text_id).getContext(); // TODO : no need u r already in context . activity extends context
+        Toast.makeText(this, "OOPS There Is An Problem ,Try Again .", Toast.LENGTH_LONG).show();
+    }
+
+    public void onEmailClicked(View view) {
+        // email clicked toast
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+
+
+        startActivity(intent);
+        // send an email for whats given ( open mail app ) .
     }
 }
 

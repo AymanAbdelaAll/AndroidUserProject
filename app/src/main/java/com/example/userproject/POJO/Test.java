@@ -9,6 +9,9 @@ import java.util.Scanner;
  * Entry class ,crud class to test my other class and implements the other class
  */
 public class Test {
+
+    //TODO : if needed move to test package
+
     private static ArrayList<Geo> geos=new ArrayList<Geo>(){{
         add(new Geo(-37.3159, 81.1496));
         add(new Geo(-43.9509,-34.4618));
