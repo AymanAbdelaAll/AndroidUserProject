@@ -139,7 +139,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        String emailClicked=tvEmail.getText()+"";
+        String emailClicked=tvEmail.getText()+""; // TODO : no . get the email from user object
         intent.putExtra(Intent.EXTRA_EMAIL,emailClicked);
         startActivity(intent);
     }
