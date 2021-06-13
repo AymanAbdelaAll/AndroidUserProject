@@ -43,7 +43,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
             holder.tvWebsite.setText(userList.get(position).getWebsite());
             final Context context = holder.itemView.getContext();
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.llShowUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onClickView(position, context);
@@ -79,14 +79,17 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.userItem_id) TextView tvId;
-        @BindView(R.id.userItem_name) TextView tvName;
-        @BindView(R.id.userItem_username) TextView tvUserName;
-        @BindView(R.id.userItem_website) TextView tvWebsite;
-        @BindView(R.id.linearlayout_displayUser) LinearLayout llShowUser;
+        TextView tvId,tvName, tvUserName,tvWebsite;
+        LinearLayout llShowUser;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
+
             ButterKnife.bind(itemView);
+            tvId=itemView.findViewById(R.id.userItem_id);
+            tvName=itemView.findViewById(R.id.userItem_name);
+            tvUserName=itemView.findViewById(R.id.userItem_username);
+            tvWebsite=itemView.findViewById(R.id.userItem_website);
+            llShowUser=itemView.findViewById(R.id.linearlayout_displayUser);
         }
     }
 }

@@ -64,11 +64,13 @@ public class UserDetailsActivity extends AppCompatActivity {
     private void loadUser() {
         //here you can change the Id of user you want
         User user=(User)getIntent().getSerializableExtra("USER");
-        UserClient.getInstance().getUser(user.getId()).enqueue(new Callback<User>() {
+        hideLoading();
+        getUserDetails(user);
+        /*UserClient.getInstance().getUser(user.getId()).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 hideLoading();
-                getRetriaveUserRequest(response.body());
+                getUserDetails(response.body());
             }
 
             @Override
@@ -76,14 +78,14 @@ public class UserDetailsActivity extends AppCompatActivity {
                 hideLoading();
                 getFaliarUserRequest();
             }
-        });
+        });*/
     }
 
     private void hideLoading() {
         rlLoading.setVisibility(View.GONE);
     }
 
-    protected void getRetriaveUserRequest(User userRespose) {
+    protected void getUserDetails(User userRespose) {
         if (userRespose != null) {
             userRetriave=userRespose;
             setUserViews(userRespose);
@@ -96,7 +98,8 @@ public class UserDetailsActivity extends AppCompatActivity {
 
             setAddressGeoViews(userAddress);
         } else {
-            getFaliarUserRequest();
+            Toast.makeText(this, "OOPS There Is An Problem ,Try Again .", Toast.LENGTH_LONG).show();
+
         }
 
     }
@@ -134,9 +137,9 @@ public class UserDetailsActivity extends AppCompatActivity {
         tvWebsite.setText(userRespose.getWebsite());
     }
 
-    protected void getFaliarUserRequest() {
+    /*protected void getFaliarUserRequest() {
         Toast.makeText(this, "OOPS There Is An Problem ,Try Again .", Toast.LENGTH_LONG).show();
-    }
+    }*/
 
     @OnClick(R.id.userdetails_text_email)
     public void onEmailClicked(View view) {

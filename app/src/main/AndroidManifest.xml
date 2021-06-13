@@ -10,14 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UserProject"
         >
-        <activity android:name=".UI.UserDetailsActivity">
+        <activity android:name=".UI.UserDetailsActivity"
+            android:parentActivityName=".UI.ListUserActivity">
+
+        </activity>
+        <activity android:name=".UI.ListUserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".UI.ListUserActivity">
-
         </activity>
     </application>
 
