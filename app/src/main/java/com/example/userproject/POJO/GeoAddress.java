@@ -2,9 +2,10 @@ package com.example.userproject.POJO;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 
 
-public class GeoAddress extends Address {
+public class GeoAddress extends Address implements Serializable {
     private Geo geo;
 
     protected GeoAddress() { }

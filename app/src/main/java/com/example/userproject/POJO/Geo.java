@@ -2,7 +2,9 @@ package com.example.userproject.POJO;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Geo {
+import java.io.Serializable;
+
+public class Geo implements Serializable {
     private Double lat;
     private Double lng;
 

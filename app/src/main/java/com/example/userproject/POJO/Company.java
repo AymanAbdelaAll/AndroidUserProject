@@ -2,7 +2,9 @@ package com.example.userproject.POJO;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable {
     private String name;
     private  String catchphrase;
     private String bs;

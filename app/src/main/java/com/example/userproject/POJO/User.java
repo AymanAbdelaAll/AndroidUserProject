@@ -2,11 +2,13 @@ package com.example.userproject.POJO;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 
 /**
  * The Users class contain all information about any user
  */
-public class User {
+public class User implements Serializable {
     private int id;
     private String name;
     private String username;

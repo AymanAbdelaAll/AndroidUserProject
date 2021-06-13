@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,23 +45,26 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.userdetails_text_address_geo) TextView tvAddressGeo;
     @BindView(R.id.userdetails_text_address_geoView) TextView tvAddressGeoView;
-    @BindView(R.id.userdetails_progress_loadingbar) ProgressBar pbLoading;
+    //@BindView(R.id.userdetails_progress_loadingbar) ProgressBar pbLoading;
+    @BindView(R.id.loading_container) RelativeLayout rlLoading;
+    private User userRetriave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_constraint_user_details);
+        setContentView(R.layout.activity_linear_user_details);
         bindViews();
         loadUser();
     }
 
-    protected void bindViews() {
+    protected void bindViews()   {
         ButterKnife.bind(this);
     }
 
     private void loadUser() {
         //here you can change the Id of user you want
-        UserClient.getInstance().getUser(1).enqueue(new Callback<User>() {
+        User user=(User)getIntent().getSerializableExtra("USER");
+        UserClient.getInstance().getUser(user.getId()).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 hideLoading();
@@ -76,11 +80,12 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     private void hideLoading() {
-        pbLoading.setVisibility(View.GONE);
+        rlLoading.setVisibility(View.GONE);
     }
 
     protected void getRetriaveUserRequest(User userRespose) {
         if (userRespose != null) {
+            userRetriave=userRespose;
             setUserViews(userRespose);
 
             Company userCompany = userRespose.getCompany();
@@ -139,7 +144,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        String emailClicked=tvEmail.getText()+""; // TODO : no . get the email from user object
+        String emailClicked=userRetriave.getEmail()+"";
         intent.putExtra(Intent.EXTRA_EMAIL,emailClicked);
         startActivity(intent);
     }

@@ -10,6 +10,7 @@
         android:id="@+id/linearlayout_displayUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="userDetails"
         android:orientation="horizontal">
 
         <TextView
@@ -39,13 +40,6 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="Website" />
-
-        <ImageButton
-            android:id="@+id/userItem_showUser"
-            android:layout_width="25sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_showicone" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
