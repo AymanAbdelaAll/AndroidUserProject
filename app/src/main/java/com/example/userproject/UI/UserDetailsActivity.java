@@ -66,19 +66,6 @@ public class UserDetailsActivity extends AppCompatActivity {
         User user=(User)getIntent().getSerializableExtra("USER");
         hideLoading();
         getUserDetails(user);
-        /*UserClient.getInstance().getUser(user.getId()).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                hideLoading();
-                getUserDetails(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                hideLoading();
-                getFaliarUserRequest();
-            }
-        });*/
     }
 
     private void hideLoading() {
@@ -137,9 +124,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         tvWebsite.setText(userRespose.getWebsite());
     }
 
-    /*protected void getFaliarUserRequest() {
-        Toast.makeText(this, "OOPS There Is An Problem ,Try Again .", Toast.LENGTH_LONG).show();
-    }*/
+
 
     @OnClick(R.id.userdetails_text_email)
     public void onEmailClicked(View view) {
