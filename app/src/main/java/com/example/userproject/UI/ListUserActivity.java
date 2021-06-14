@@ -13,13 +13,21 @@ import com.example.userproject.Networking.UserClient;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
 
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+
+
+import io.reactivex.schedulers.Schedulers;
+
 
 public class ListUserActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -34,27 +42,45 @@ public class ListUserActivity extends AppCompatActivity {
 
     protected void loadUsers() {
         bindViews();
+        UserListAdapter adapter = getUserListAdapter();
+        createRecycleObserver(adapter);
+    }
 
+    @NotNull
+    private UserListAdapter getUserListAdapter() {
         UserListAdapter adapter=new UserListAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        return adapter;
+    }
 
-        UserClient.getInstance().getUsers().enqueue(new Callback<List<User>>() {
+    private void createRecycleObserver(UserListAdapter adapter) {
+        Observable listObservavle= UserClient.getInstance().getUsers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        Observer observer=new Observer() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onSubscribe(Disposable d) {
                 hideLoading();
-                adapter.setList(response.body());
             }
 
-
+            @Override
+            public void onNext(Object value) {
+                adapter.setList((List<User>)value);
+            }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                hideLoading();
-                Toast.makeText(recyclerView.getContext(),"OOPS There Is An problem ,Try Again .",Toast.LENGTH_LONG).show();;
+            public void onError(Throwable e) {
+                Toast.makeText(recyclerView.getContext(),"OOPS There Is An problem ,Try Again .",Toast.LENGTH_LONG).show();
             }
-        });
 
+            @Override
+            public void onComplete() {
+                hideLoading();
+            }
+        };
+        listObservavle.subscribe(observer);
     }
 
     protected void bindViews() {

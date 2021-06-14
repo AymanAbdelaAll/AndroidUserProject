@@ -4,9 +4,12 @@ import com.example.userproject.POJO.User;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class UserClient {
     private final String URL="https://jsonplaceholder.typicode.com/";
@@ -17,6 +20,7 @@ public class UserClient {
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         userInterface=retrofit.create(UserInterface.class);
@@ -30,7 +34,7 @@ public class UserClient {
         return getInstance ().userInterface.getUser(id);
     }
 
-    public Call<List<User>> getUsers(){
+    public Observable<List<User>> getUsers(){
         return getInstance ().userInterface.getUsers();
     }
 }
