@@ -1,11 +1,16 @@
 package com.example.userproject.UI;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,9 +50,11 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.userdetails_text_address_geo) TextView tvAddressGeo;
     @BindView(R.id.userdetails_text_address_geoView) TextView tvAddressGeoView;
-    //@BindView(R.id.userdetails_progress_loadingbar) ProgressBar pbLoading;
+
+    @BindView(R.id.userdetails_button_changestatus) ImageButton btChangeStatus;
     @BindView(R.id.loading_container) RelativeLayout rlLoading;
     private User userRetriave;
+    boolean userIdle=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +142,17 @@ public class UserDetailsActivity extends AppCompatActivity {
         String emailClicked=userRetriave.getEmail()+"";
         intent.putExtra(Intent.EXTRA_EMAIL,emailClicked);
         startActivity(intent);
+    }
+
+
+    public void setUserStatus(View view) {
+        if (userIdle){
+            btChangeStatus.setImageResource(R.drawable.ic_busyuser_star_24);
+            userIdle=false;
+        }else{
+            btChangeStatus.setImageResource(R.drawable.ic_idleuser_star_24);
+            userIdle=true;
+        }
     }
 }
 
