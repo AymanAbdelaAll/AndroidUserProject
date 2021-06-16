@@ -32,29 +32,50 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserDetailsActivity extends AppCompatActivity {
-    @BindView(R.id.userdetails_text_id) TextView tvId;
-    @BindView(R.id.userdetails_text_name) TextView tvName;
-    @BindView(R.id.userdetails_text_username) TextView tvUserName;
-    @BindView(R.id.userdetails_text_website) TextView tvWebsite;
-    @BindView(R.id.userdetails_text_email) TextView tvEmail;
-    @BindView(R.id.userdetails_text_phone) TextView tvPhone;
+    @BindView(R.id.userdetails_text_id)
+    TextView tvId;
+    @BindView(R.id.userdetails_text_name)
+    TextView tvName;
+    @BindView(R.id.userdetails_text_username)
+    TextView tvUserName;
+    @BindView(R.id.userdetails_text_website)
+    TextView tvWebsite;
+    @BindView(R.id.userdetails_text_email)
+    TextView tvEmail;
+    @BindView(R.id.userdetails_text_phone)
+    TextView tvPhone;
 
-    @BindView(R.id.userdetails_text_address_street) TextView tvAddressStreet;
-    @BindView(R.id.userdetails_text_address_suite) TextView tvAddressSuite;
-    @BindView(R.id.userdetails_text_address_city) TextView tvAddressCity;
-    @BindView(R.id.userdetails_text_address_zipcode) TextView tvAddressZipcode;
+    @BindView(R.id.userdetails_text_address_street)
+    TextView tvAddressStreet;
+    @BindView(R.id.userdetails_text_address_suite)
+    TextView tvAddressSuite;
+    @BindView(R.id.userdetails_text_address_city)
+    TextView tvAddressCity;
+    @BindView(R.id.userdetails_text_address_zipcode)
+    TextView tvAddressZipcode;
 
-    @BindView(R.id.userdetails_text_company_name) TextView tvCompanyName;
-    @BindView(R.id.userdetails_text_company_catchphrase) TextView tvCompanyCatchphrase;
-    @BindView(R.id.userdetails_text_company_bs) TextView tvCompanyBs;
+    @BindView(R.id.userdetails_text_company_name)
+    TextView tvCompanyName;
+    @BindView(R.id.userdetails_text_company_catchphrase)
+    TextView tvCompanyCatchphrase;
+    @BindView(R.id.userdetails_text_company_bs)
+    TextView tvCompanyBs;
 
-    @BindView(R.id.userdetails_text_address_geo) TextView tvAddressGeo;
-    @BindView(R.id.userdetails_text_address_geoView) TextView tvAddressGeoView;
+    @BindView(R.id.userdetails_text_address_geo)
+    TextView tvAddressGeo;
+    @BindView(R.id.userdetails_text_address_geoView)
+    TextView tvAddressGeoView;
 
-    @BindView(R.id.userdetails_button_changestatus) ImageButton btChangeStatus;
-    @BindView(R.id.loading_container) RelativeLayout rlLoading;
+    @BindView(R.id.userdetails_button_changestatus)
+    ImageButton btChangeStatus;
+    @BindView(R.id.loading_container)
+    RelativeLayout rlLoading;
     private User userRetriave;
-    boolean userIdle=true;
+    boolean userIdle = true;
+
+
+    //TODO : lets build a starter here
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +85,13 @@ public class UserDetailsActivity extends AppCompatActivity {
         loadUser();
     }
 
-    protected void bindViews()   {
+    protected void bindViews() {
         ButterKnife.bind(this);
     }
 
     private void loadUser() {
         //here you can change the Id of user you want
-        User user=(User)getIntent().getSerializableExtra("USER");
+        User user = (User) getIntent().getSerializableExtra("USER");// TODO : save as static final member
         hideLoading();
         getUserDetails(user);
     }
@@ -81,7 +102,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     protected void getUserDetails(User userRespose) {
         if (userRespose != null) {
-            userRetriave=userRespose;
+            userRetriave = userRespose;
             setUserViews(userRespose);
 
             Company userCompany = userRespose.getCompany();
@@ -92,6 +113,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
             setAddressGeoViews(userAddress);
         } else {
+            //TODO : lets store this text in res , good for localization
             Toast.makeText(this, "OOPS There Is An Problem ,Try Again .", Toast.LENGTH_LONG).show();
 
         }
@@ -132,26 +154,25 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
 
-
     @OnClick(R.id.userdetails_text_email)
     public void onEmailClicked(View view) {
-        Toast.makeText(this,"Email View Clicked .",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Email View Clicked .", Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        String emailClicked=userRetriave.getEmail()+"";
-        intent.putExtra(Intent.EXTRA_EMAIL,emailClicked);
+        String emailClicked = userRetriave.getEmail() + "";
+        intent.putExtra(Intent.EXTRA_EMAIL, emailClicked);
         startActivity(intent);
     }
 
 
     public void setUserStatus(View view) {
-        if (userIdle){
+        if (userIdle) {
             btChangeStatus.setImageResource(R.drawable.ic_busyuser_star_24);
-            userIdle=false;
-        }else{
+            userIdle = false;
+        } else {
             btChangeStatus.setImageResource(R.drawable.ic_idleuser_star_24);
-            userIdle=true;
+            userIdle = true;
         }
     }
 }

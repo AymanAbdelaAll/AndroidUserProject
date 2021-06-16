@@ -10,7 +10,6 @@
         android:layout_height="match_parent">
 
 
-
         <ImageView
             android:id="@+id/imageview"
             android:layout_width="104dp"
@@ -25,9 +24,9 @@
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="4dp"
+            android:layout_below="@+id/imageview"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/imageview"
             android:background="@color/black" />
 
         <LinearLayout
@@ -35,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line1"
-            android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:orientation="vertical">
 
             <LinearLayout
@@ -166,8 +165,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line2"
-            android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:orientation="vertical">
 
             <TextView
@@ -248,8 +247,8 @@
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:layout_below="@+id/linearlayout_company_details"
-            android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:background="@color/black" />
 
         <LinearLayout
@@ -383,8 +382,8 @@
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:layout_below="@+id/linearlayout_address_details"
-            android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:background="@color/black" />
 
         <LinearLayout
@@ -392,8 +391,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line4"
-            android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:orientation="horizontal"
             android:weightSum="5">
 
@@ -412,21 +411,24 @@
                 android:gravity="center"
                 android:text="@string/user_email" />
         </LinearLayout>
+
+
         <View
             android:id="@+id/line5"
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:layout_below="@+id/linearlayout_user_email"
-            android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:background="@color/black" />
 
+        <!-- TODO : lets try to keep top , easier to access -->
         <ImageButton
             android:id="@+id/userdetails_button_changestatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/roundcorner"
             android:onClick="setUserStatus"
             android:paddingTop="2dp"

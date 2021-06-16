@@ -54,6 +54,8 @@ public class ListUserActivity extends AppCompatActivity {
     }
 
     private void createRecycleObserver(UserListAdapter adapter) {
+
+        //TODO : lets talk about MVP
         Observable listObservavle= UserClient.getInstance().getUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
