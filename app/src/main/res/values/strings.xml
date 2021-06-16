@@ -16,4 +16,6 @@
     <string name="user_website">Website</string>
     <string name="user_address_zipcode">zipcode</string>
     <string name="user_address_geo">Geo</string>
+    <string name="network_error_msg">OOPS There Is An Problem ,Try Again .</string>
+    <string name="user_tvemail_clicked_msg">Email View Clicked .</string>
 </resources>

@@ -46,27 +46,12 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
             holder.llShowUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickView(position, context);
+                    User user = userList.get(position);
+                    UserDetailsActivity.start(context,user);
                 }
             });
-
     }
 
-    private void onClickView(int position, Context context) {
-        int userId=userList.get(position).getId();
-        UserClient.getInstance().getUser(userId).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Intent intent = new Intent(context, UserDetailsActivity.class);
-                intent.putExtra("USER",userList.get(position));
-                context.startActivity(intent);
-            }
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(context, "The User does't exist .", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     @Override
     public int getItemCount() {
@@ -83,7 +68,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
         LinearLayout llShowUser;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-
             ButterKnife.bind(itemView);
             tvId=itemView.findViewById(R.id.userItem_id);
             tvName=itemView.findViewById(R.id.userItem_name);

@@ -73,7 +73,8 @@ public class ListUserActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
-                Toast.makeText(recyclerView.getContext(),"OOPS There Is An problem ,Try Again .",Toast.LENGTH_LONG).show();
+                String error_msg=getString(R.string.network_error_msg);
+                Toast.makeText(recyclerView.getContext(),error_msg,Toast.LENGTH_LONG).show();
             }
 
             @Override

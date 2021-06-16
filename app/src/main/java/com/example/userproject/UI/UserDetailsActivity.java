@@ -1,5 +1,6 @@
 package com.example.userproject.UI;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -32,6 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserDetailsActivity extends AppCompatActivity {
+    private static String KEY_USER="User";
     @BindView(R.id.userdetails_text_id)
     TextView tvId;
     @BindView(R.id.userdetails_text_name)
@@ -74,13 +77,18 @@ public class UserDetailsActivity extends AppCompatActivity {
     boolean userIdle = true;
 
 
-    //TODO : lets build a starter here
+    public static void start(Context context,User user) {
+        Intent starter = new Intent(context, UserDetailsActivity.class);
+        starter.putExtra(KEY_USER,user);
+        context.startActivity(starter);
+    }
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_linear_user_details);
+        setContentView(R.layout.activity_relative_user_details);
         bindViews();
         loadUser();
     }
@@ -91,7 +99,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     private void loadUser() {
         //here you can change the Id of user you want
-        User user = (User) getIntent().getSerializableExtra("USER");// TODO : save as static final member
+        User user = (User) getIntent().getSerializableExtra(KEY_USER);
         hideLoading();
         getUserDetails(user);
     }
@@ -113,8 +121,8 @@ public class UserDetailsActivity extends AppCompatActivity {
 
             setAddressGeoViews(userAddress);
         } else {
-            //TODO : lets store this text in res , good for localization
-            Toast.makeText(this, "OOPS There Is An Problem ,Try Again .", Toast.LENGTH_LONG).show();
+            String error_msg=getString(R.string.network_error_msg);
+            Toast.makeText(this, error_msg, Toast.LENGTH_LONG).show();
 
         }
 
@@ -156,7 +164,8 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     @OnClick(R.id.userdetails_text_email)
     public void onEmailClicked(View view) {
-        Toast.makeText(this, "Email View Clicked .", Toast.LENGTH_LONG).show();
+        String emailClickedMessage=getString(R.string.user_tvemail_clicked_msg);
+        Toast.makeText(this,emailClickedMessage , Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("message/rfc822");

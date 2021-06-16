@@ -14,8 +14,8 @@
             android:id="@+id/imageview"
             android:layout_width="104dp"
             android:layout_height="72dp"
+            android:layout_below="@+id/userdetails_button_changestatus"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
 
             android:src="@drawable/ic_userphoto" />
@@ -422,13 +422,12 @@
             android:layout_alignParentRight="true"
             android:background="@color/black" />
 
-        <!-- TODO : lets try to keep top , easier to access -->
         <ImageButton
             android:id="@+id/userdetails_button_changestatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/roundcorner"
             android:onClick="setUserStatus"
             android:paddingTop="2dp"

@@ -16,7 +16,7 @@
             android:src="@drawable/ic_userphoto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/userdetails_button_changestatus" />
 
         <View
             android:id="@+id/view"
@@ -406,6 +406,7 @@
                 android:gravity="center"
                 android:text="@string/user_email" />
         </LinearLayout>
+
         <View
             android:id="@+id/view4"
             android:layout_width="match_parent"
@@ -414,15 +415,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearlayout5" />
+
         <ImageButton
             android:id="@+id/userdetails_button_changestatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/roundcorner"
             android:onClick="setUserStatus"
             android:src="@drawable/ic_idleuser_star_24"
+
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/roundcorner"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
