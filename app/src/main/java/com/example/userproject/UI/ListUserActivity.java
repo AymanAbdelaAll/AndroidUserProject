@@ -7,43 +7,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.example.userproject.Networking.UserClient;
-import com.example.userproject.POJO.User;
 import com.example.userproject.R;
+import com.example.userproject.UserPresenter.ListUserViewPresenter;
 
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-
-import io.reactivex.schedulers.Schedulers;
 
 
-public class ListUserActivity extends AppCompatActivity {
+public class ListUserActivity extends AppCompatActivity implements ListUserViewPresenter.userListInterface{
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.loading_container) RelativeLayout rlLoading;
-
+    ListUserViewPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user);
-        loadUsers();
-    }
-
-    protected void loadUsers() {
         bindViews();
         UserListAdapter adapter = getUserListAdapter();
-        createRecycleObserver(adapter);
+        presenter=new ListUserViewPresenter();
+        onRetrieveUser(adapter);
+
     }
+
 
     @NotNull
     private UserListAdapter getUserListAdapter() {
@@ -53,44 +42,15 @@ public class ListUserActivity extends AppCompatActivity {
         return adapter;
     }
 
-    private void createRecycleObserver(UserListAdapter adapter) {
-
-        //TODO : lets talk about MVP
-        Observable listObservavle= UserClient.getInstance().getUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-
-        Observer observer=new Observer() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                hideLoading();
-            }
-
-            @Override
-            public void onNext(Object value) {
-                adapter.setList((List<User>)value);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                String error_msg=getString(R.string.network_error_msg);
-                Toast.makeText(recyclerView.getContext(),error_msg,Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onComplete() {
-                hideLoading();
-            }
-        };
-        listObservavle.subscribe(observer);
-    }
 
     protected void bindViews() {
         ButterKnife.bind(this);
     }
 
-    private void hideLoading() {
-        rlLoading.setVisibility(View.GONE);
-    }
 
+    @Override
+    public void onRetrieveUser(UserListAdapter userListAdapter) {
+        presenter.setUserListView(rlLoading.getRootView());
+        presenter.loadUsers(userListAdapter);
+    }
 }

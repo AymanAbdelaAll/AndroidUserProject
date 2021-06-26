@@ -55,7 +55,7 @@ public class Test {
         add(new Company("Hoeger LLC","Centralized empowering task-force","target end-to-end models"));
     }};
 
-    private static ArrayList <User> users=new ArrayList<User>(){
+    private static ArrayList <User> users =new ArrayList<User>(){
         {
             add(new User(addresses.get(0), companies.get(0), "Leanne Graham", "Bret",
                     "Sincere@april.biz", "1-770-736-8031 x56442", "hildegard.org"));
@@ -123,7 +123,7 @@ public class Test {
         }
     }
 
-    public static void updateUserCli(ArrayList<User>users,int id){
+    public static void updateUserCli(ArrayList<User> users, int id){
         Scanner scanner=new Scanner(System.in);
         System.out.println("Enter 1 to update name .");
         System.out.println("Enter 2 to update username .");
@@ -170,8 +170,8 @@ public class Test {
                 String city=scanner.nextLine();
                 System.out.println("Enter The new Address-zipcode of user :");
                 String zipcode=scanner.nextLine();
-                User user=users.get(id);
-                Address userAddress=user.getAddress();
+                User user = users.get(id);
+                Address userAddress= user.getAddress();
                 if (userAddress instanceof GeoAddress){
                     System.out.println("Enter The new Geo-lat of user :");
                     Double lat=scanner.nextDouble();
@@ -196,7 +196,7 @@ public class Test {
                 System.out.println("You Enter invalid number .");
         }
     }
-    public static User removeUsers(@NotNull ArrayList<User> users,@NotNull User user){
+    public static User removeUsers(@NotNull ArrayList<User> users, @NotNull User user){
         boolean isremoved= users.remove(user);
         if (isremoved){
             System.out.println("The User Deleted .");
@@ -209,15 +209,15 @@ public class Test {
 
     public static void showUsers(@NotNull ArrayList<User> users){
         System.out.println("The list of Users:");
-        for (User user:users) {
+        for (User user : users) {
             System.out.println(user.toString());
             System.out.println();
         }
     }
 
     public static boolean updateUsersName(@NotNull ArrayList<User> users, @NotNull String name, int index){
-        if (index<users.size()&&index>=0){
-            User user =users.get(index);
+        if (index< users.size()&&index>=0){
+            User user = users.get(index);
             user.setName(name);
             System.out.println("The Name Of User Updated .");
             return true;
@@ -228,8 +228,8 @@ public class Test {
     }
 
     public static boolean updateUsersUserName(@NotNull ArrayList<User> users, @NotNull String username, int index){
-        if (index<users.size()&&index>=0){
-            User user= users.get(index);
+        if (index< users.size()&&index>=0){
+            User user = users.get(index);
             user.setUsername(username);
             System.out.println("The Username Updated .");
             return true;
@@ -240,7 +240,7 @@ public class Test {
     }
 
     public static boolean updateUsersEmail(@NotNull ArrayList<User> users, @NotNull String email, int index){
-        if (index<users.size()&&index>=0){
+        if (index< users.size()&&index>=0){
             User user = users.get(index);
             user.setUsername(email);
             System.out.println("The User Email Updated .");
@@ -252,7 +252,7 @@ public class Test {
     }
 
     public static boolean updateUsersPhone(@NotNull ArrayList<User> users, @NotNull String phone, int index){
-        if (index<users.size()&&index>=0){
+        if (index< users.size()&&index>=0){
             User user = users.get(index);
             user.setUsername(phone);
             System.out.println("The User Phone Updated .");
@@ -264,7 +264,7 @@ public class Test {
     }
 
     public static boolean updateUsersWebsite(@NotNull ArrayList<User> users, @NotNull String website, int index){
-        if (index<users.size()&&index>=0){
+        if (index< users.size()&&index>=0){
             User user = users.get(index);
             user.setUsername(website);
             System.out.println("The User Website Updated .");
@@ -276,7 +276,7 @@ public class Test {
     }
 
     public static boolean updateUsersAddress(@NotNull ArrayList<User> users, @NotNull Address address, int index){
-        if (index<users.size()&&index>=0){
+        if (index< users.size()&&index>=0){
             User user = users.get(index);
             user.setAddress(address);
             System.out.println("The Address Updated .");
@@ -288,7 +288,7 @@ public class Test {
     }
 
     public static boolean updateUsersCompany(@NotNull ArrayList<User> users, @NotNull Company company, int index){
-        if (index<users.size()&&index>=0){
+        if (index< users.size()&&index>=0){
             User user = users.get(index);
             user.setCompany(company);
             System.out.println("The Company Object Is Updated .");

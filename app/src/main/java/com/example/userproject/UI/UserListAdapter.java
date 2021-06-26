@@ -1,11 +1,10 @@
 package com.example.userproject.UI;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,18 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.userproject.Networking.UserClient;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
+import com.example.userproject.UserPresenter.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserViewHolder> {
-    private List<User> userList = new ArrayList<>();
+    private static final String TAG ="USERlISTACTIVITY" ;
+    private List<UserViewModel> userViewModelList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -37,17 +37,28 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-            holder.tvId.setText(userList.get(position).getId() + "");
-            holder.tvName.setText(userList.get(position).getName());
-            holder.tvUserName.setText(userList.get(position).getUsername());
-            holder.tvWebsite.setText(userList.get(position).getWebsite());
+            holder.tvId.setText(userViewModelList.get(position).getId() + "");
+            holder.tvName.setText(userViewModelList.get(position).getName());
+            holder.tvUserName.setText(userViewModelList.get(position).getUsername());
+            holder.tvWebsite.setText(userViewModelList.get(position).getWebsite());
             final Context context = holder.itemView.getContext();
+
 
             holder.llShowUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    User user = userList.get(position);
-                    UserDetailsActivity.start(context,user);
+                    UserClient.getInstance().getUser(userViewModelList.get(position).getId()).enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            User user = response.body();
+                            UserDetailsActivity.start(context, user);
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Log.d(TAG, "The User Doesnt Exist");
+                        }
+                    });
                 }
             });
     }
@@ -55,11 +66,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 
     @Override
     public int getItemCount() {
-        return userList.size();
+        return userViewModelList.size();
     }
 
-    public void setList(List<User> userList) {
-        this.userList = userList;
+    public void setList(List<UserViewModel> userList) {
+        this.userViewModelList = userList;
         notifyDataSetChanged();
     }
 

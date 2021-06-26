@@ -1,37 +1,29 @@
 package com.example.userproject.UI;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.userproject.Networking.UserClient;
+
 import com.example.userproject.POJO.Address;
 import com.example.userproject.POJO.Company;
 import com.example.userproject.POJO.Geo;
 import com.example.userproject.POJO.GeoAddress;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
+import com.example.userproject.UserPresenter.UserViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class UserDetailsActivity extends AppCompatActivity {
     private static String KEY_USER="User";
@@ -77,9 +69,9 @@ public class UserDetailsActivity extends AppCompatActivity {
     boolean userIdle = true;
 
 
-    public static void start(Context context,User user) {
+    public static void start(Context context, User user) {
         Intent starter = new Intent(context, UserDetailsActivity.class);
-        starter.putExtra(KEY_USER,user);
+        starter.putExtra(KEY_USER, user);
         context.startActivity(starter);
     }
 
