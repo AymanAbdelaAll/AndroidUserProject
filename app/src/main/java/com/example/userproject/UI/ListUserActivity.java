@@ -29,7 +29,7 @@ public class ListUserActivity extends AppCompatActivity implements ListUserViewP
         bindViews();
         UserListAdapter adapter = getUserListAdapter();
         presenter=new ListUserViewPresenter();
-        onRetrieveUser(adapter);
+        onRetrieveUser(adapter);// TODO : rename into loadSth()...
 
     }
 
@@ -50,6 +50,8 @@ public class ListUserActivity extends AppCompatActivity implements ListUserViewP
 
     @Override
     public void onRetrieveUser(UserListAdapter userListAdapter) {
+        // TODO : check presenter if null
+        // TODO : dont pass ur root view to the presenter , it defats the purpose of mvp .
         presenter.setUserListView(rlLoading.getRootView());
         presenter.loadUsers(userListAdapter);
     }

@@ -24,10 +24,13 @@ public class ListUserViewPresenter implements ListUserViewInterface {
 
     public interface userListInterface{
         void onRetrieveUser(UserListAdapter userListAdapter);
+
+        //TODO : need to define other things like show/hide laoding and onError/failure
     }
 
-    private View userListView;
+    private View userListView; //TODO : No!
 
+    // TODO : pls also define a memebr of type 'userListInterface' to be used as a call back
     public void setUserListView(View userListView) {
         this.userListView = userListView;
     }
@@ -44,12 +47,14 @@ public class ListUserViewPresenter implements ListUserViewInterface {
 
                     @Override
                     public void onNext(List<User> value) {
+                        // TODO : deliver the list and let the view build it .
                         List<UserViewModel> userViewModelViewModels =transform(value);
                         adapter.setList((List<UserViewModel>) userViewModelViewModels);
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        // TODO : NO! dont do UI work on the presnter or schedulers.io thread .
                         String error_msg=userListView.getResources().getString(R.string.network_error_msg);
                         Toast.makeText(userListView.getContext(),error_msg,Toast.LENGTH_LONG).show();
                     }
@@ -57,7 +62,7 @@ public class ListUserViewPresenter implements ListUserViewInterface {
                     @Override
                     public void onComplete()
                     {
-                        hideLoading();
+                        hideLoading();//TODO : nice approach .
                     }
                 });
          }
@@ -78,12 +83,14 @@ public class ListUserViewPresenter implements ListUserViewInterface {
 
     @Override
     public void hideLoading() {
+        //TODO: NO! call from the interface
         RelativeLayout rlLodaingContainer=userListView.findViewById(R.id.loading_container);
         rlLodaingContainer.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showLodaing() {
+        //TODO: NO! call from the interface
         RelativeLayout rlLodaingContainer=userListView.findViewById(R.id.loading_container);
         rlLodaingContainer.setVisibility(View.VISIBLE);
     }

@@ -5,6 +5,8 @@ import com.example.userproject.POJO.Company;
 
 import java.io.Serializable;
 
+
+//TODO : move to the vm package
 public class UserViewModel implements Serializable {
     private int id=0;
     private String name="Name";
