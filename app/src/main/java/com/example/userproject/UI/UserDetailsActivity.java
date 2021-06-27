@@ -19,7 +19,6 @@ import com.example.userproject.POJO.Geo;
 import com.example.userproject.POJO.GeoAddress;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
-import com.example.userproject.UserPresenter.UserViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,14 +67,11 @@ public class UserDetailsActivity extends AppCompatActivity {
     private User userRetriave;
     boolean userIdle = true;
 
-
     public static void start(Context context, User user) {
         Intent starter = new Intent(context, UserDetailsActivity.class);
         starter.putExtra(KEY_USER, user);
         context.startActivity(starter);
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +113,6 @@ public class UserDetailsActivity extends AppCompatActivity {
             Toast.makeText(this, error_msg, Toast.LENGTH_LONG).show();
 
         }
-
     }
 
     private void setAddressGeoViews(Address userAddress) {
@@ -153,7 +148,6 @@ public class UserDetailsActivity extends AppCompatActivity {
         tvWebsite.setText(userRespose.getWebsite());
     }
 
-
     @OnClick(R.id.userdetails_text_email)
     public void onEmailClicked(View view) {
         String emailClickedMessage=getString(R.string.user_tvemail_clicked_msg);
@@ -165,7 +159,6 @@ public class UserDetailsActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_EMAIL, emailClicked);
         startActivity(intent);
     }
-
 
     public void setUserStatus(View view) {
         if (userIdle) {

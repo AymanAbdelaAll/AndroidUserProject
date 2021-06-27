@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.userproject.Networking.UserClient;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
-import com.example.userproject.UserPresenter.UserViewModel;
+import com.example.userproject.VM.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +40,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
             holder.tvName.setText(userViewModelList.get(position).getName());
             holder.tvUserName.setText(userViewModelList.get(position).getUsername());
             holder.tvWebsite.setText(userViewModelList.get(position).getWebsite());
-            final Context context = holder.itemView.getContext();
-
 
             holder.llShowUser.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -51,7 +48,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             User user = response.body();
-                            UserDetailsActivity.start(context, user);
+                            UserDetailsActivity.start(v.getContext(), user);
                         }
 
                         @Override
