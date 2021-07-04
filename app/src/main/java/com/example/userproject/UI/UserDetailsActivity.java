@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -25,7 +26,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserDetailsActivity extends AppCompatActivity {
-    private static String KEY_USER="User";
+    private static final String KEY_USER="User";
+    public static final String MyPREFERENCES = "ListUserPrefs";
+    public static final String FAV_BTN="FAVORITE_BTN";
+
     @BindView(R.id.userdetails_text_id)
     TextView tvId;
     @BindView(R.id.userdetails_text_name)
@@ -64,8 +68,11 @@ public class UserDetailsActivity extends AppCompatActivity {
     ImageButton btChangeStatus;
     @BindView(R.id.loading_container)
     RelativeLayout rlLoading;
+
     private User userRetriave;
-    boolean userIdle = true;
+    boolean userIdle;
+    SharedPreferences sharedpreferences;
+
 
     public static void start(Context context, User user) {
         Intent starter = new Intent(context, UserDetailsActivity.class);
@@ -78,8 +85,10 @@ public class UserDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relative_user_details);
         bindViews();
+        loadPreference();
         loadUser();
     }
+
 
     protected void bindViews() {
         ButterKnife.bind(this);
@@ -161,7 +170,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     public void setUserStatus(View view) {
-        if (userIdle) {
+        if (userIdle){
             btChangeStatus.setImageResource(R.drawable.ic_busyuser_star_24);
             userIdle = false;
         } else {
@@ -169,6 +178,47 @@ public class UserDetailsActivity extends AppCompatActivity {
             userIdle = true;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadPreference();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadPreference();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setPreferences();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setPreferences();
+    }
+
+    private void setPreferences() {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        if (userIdle) {
+            editor.putBoolean(UserDetailsActivity.FAV_BTN, false);
+        } else {
+            editor.putBoolean(UserDetailsActivity.FAV_BTN, true);
+        }
+        editor.commit();
+    }
+
+    private void loadPreference() {
+        sharedpreferences= getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        userIdle= sharedpreferences.getBoolean(UserDetailsActivity.FAV_BTN,false);
+        setUserStatus(btChangeStatus);
+    }
+
 }
 
 
