@@ -47,7 +47,6 @@ public class ListUserViewPresenter  {
                         @Override
                         public void onNext(List<User> value) {
                             List<UserViewModel> userViewModels = transform(value);
-                            //TODO :is it true to pass the list I transform it to have the certain class form User to UserViewModel
                             userListInterface.onSuccusssRetreveUser(userViewModels,value);
                         }
 
@@ -72,7 +71,7 @@ public class ListUserViewPresenter  {
             userViewModel.setId(user.getId());
             userViewModel.setName(user.getName());
             userViewModel.setUsername(user.getUsername());
-            userViewModel.setWebsite(user.getWebsite());
+            userViewModel.setEmail(user.getEmail());
             userViewModelViewModels.add(userViewModel);
             }
         }

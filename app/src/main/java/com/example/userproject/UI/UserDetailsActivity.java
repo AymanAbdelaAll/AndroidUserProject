@@ -20,6 +20,7 @@ import com.example.userproject.POJO.Geo;
 import com.example.userproject.POJO.GeoAddress;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
+import com.example.userproject.VM.UserViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,14 +37,12 @@ public class UserDetailsActivity extends AppCompatActivity {
     TextView tvName;
     @BindView(R.id.userdetails_text_username)
     TextView tvUserName;
-    @BindView(R.id.userdetails_text_website)
-    TextView tvWebsite;
+
     @BindView(R.id.userdetails_text_email)
     TextView tvEmail;
-    @BindView(R.id.userdetails_text_phone)
-    TextView tvPhone;
 
-    @BindView(R.id.userdetails_text_address_street)
+
+    /*@BindView(R.id.userdetails_text_address_street)
     TextView tvAddressStreet;
     @BindView(R.id.userdetails_text_address_suite)
     TextView tvAddressSuite;
@@ -63,27 +62,27 @@ public class UserDetailsActivity extends AppCompatActivity {
     TextView tvAddressGeo;
     @BindView(R.id.userdetails_text_address_geoView)
     TextView tvAddressGeoView;
-
+    */
     @BindView(R.id.userdetails_button_changestatus)
     ImageButton btChangeStatus;
     @BindView(R.id.loading_container)
     RelativeLayout rlLoading;
 
-    private User userRetriave;
+    private UserViewModel userRetriave;
     boolean userIdle;
     SharedPreferences sharedpreferences;
 
 
-    public static void start(Context context, User user) {
+    public static void start(Context context, UserViewModel userViewModel) {
         Intent starter = new Intent(context, UserDetailsActivity.class);
-        starter.putExtra(KEY_USER, user);
+        starter.putExtra(KEY_USER, userViewModel);
         context.startActivity(starter);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_relative_user_details);
+        setContentView(R.layout.activity_linear_user_details);
         bindViews();
         loadUser();
         loadPreference();
@@ -96,7 +95,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     private void loadUser() {
         //here you can change the Id of user you want
-        User user = (User) getIntent().getSerializableExtra(KEY_USER);
+        UserViewModel user = (UserViewModel) getIntent().getSerializableExtra(KEY_USER);
         hideLoading();
         getUserDetails(user);
     }
@@ -105,11 +104,11 @@ public class UserDetailsActivity extends AppCompatActivity {
         rlLoading.setVisibility(View.GONE);
     }
 
-    protected void getUserDetails(User userRespose) {
+    protected void getUserDetails(UserViewModel userRespose) {
         if (userRespose != null) {
             userRetriave = userRespose;
             setUserViews(userRespose);
-
+            /*
             Company userCompany = userRespose.getCompany();
             setUserCompanyViews(userCompany);
 
@@ -121,10 +120,12 @@ public class UserDetailsActivity extends AppCompatActivity {
             String error_msg=getString(R.string.network_error_msg);
             Toast.makeText(this, error_msg, Toast.LENGTH_LONG).show();
 
+            */
         }
+
     }
 
-    private void setAddressGeoViews(Address userAddress) {
+    /*private void setAddressGeoViews(Address userAddress) {
         if (userAddress instanceof GeoAddress) {
             Geo userGeo = ((GeoAddress) userAddress).getGeo();
             String geoLatAndLng = userGeo.getLat() + " - " + userGeo.getLng();
@@ -147,14 +148,12 @@ public class UserDetailsActivity extends AppCompatActivity {
         tvCompanyName.setText(userCompany.getName());
         tvCompanyCatchphrase.setText((userCompany.getCatchphrase()));
     }
-
-    private void setUserViews(User userRespose) {
+    */
+    private void setUserViews(UserViewModel userRespose) {
         tvId.setText(userRespose.getId() + "");
         tvName.setText(userRespose.getName());
         tvUserName.setText(userRespose.getUsername());
-        tvPhone.setText(userRespose.getPhone());
         tvEmail.setText(userRespose.getEmail());
-        tvWebsite.setText(userRespose.getWebsite());
     }
 
     @OnClick(R.id.userdetails_text_email)

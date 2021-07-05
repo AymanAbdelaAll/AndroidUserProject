@@ -63,7 +63,7 @@ public class ListUserActivity extends AppCompatActivity implements ListUserViewP
 
     @Override
     public void onSuccusssRetreveUser(List<UserViewModel> userViewModels, List<User>userList) {
-        adapter.setList(userViewModels,userList);
+        adapter.setList(userViewModels);
     }
 
     @Override

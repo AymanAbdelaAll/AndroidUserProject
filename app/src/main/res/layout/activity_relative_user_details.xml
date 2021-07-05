@@ -108,6 +108,7 @@
                     android:text="@string/user_username" />
             </LinearLayout>
 
+            <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,6 +152,32 @@
                     android:gravity="center"
                     android:text="@string/user_website" />
             </LinearLayout>
+            -->
+            <LinearLayout
+                android:id="@+id/linearlayout_user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/user_email" />
+
+                <TextView
+                    android:id="@+id/userdetails_text_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center"
+                    android:text="@string/user_email" />
+            </LinearLayout>
         </LinearLayout>
 
         <View
@@ -160,6 +187,7 @@
             android:layout_below="@+id/linearlayout_user_details"
             android:background="@color/black" />
 
+        <!--
         <LinearLayout
             android:id="@+id/linearlayout_company_details"
             android:layout_width="match_parent"
@@ -376,7 +404,6 @@
                     android:text="@string/user_address_geo" />
             </LinearLayout>
         </LinearLayout>
-
         <View
             android:id="@+id/line4"
             android:layout_width="match_parent"
@@ -386,33 +413,6 @@
             android:layout_alignParentRight="true"
             android:background="@color/black" />
 
-        <LinearLayout
-            android:id="@+id/linearlayout_user_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line4"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal"
-            android:weightSum="5">
-
-            <TextView
-                android:id="@+id/textView47"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/user_email" />
-
-            <TextView
-                android:id="@+id/userdetails_text_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center"
-                android:text="@string/user_email" />
-        </LinearLayout>
-
-
         <View
             android:id="@+id/line5"
             android:layout_width="match_parent"
@@ -421,7 +421,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:background="@color/black" />
-
+        -->
         <ImageButton
             android:id="@+id/userdetails_button_changestatus"
             android:layout_width="wrap_content"

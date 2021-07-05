@@ -10,7 +10,16 @@ public class UserViewModel implements Serializable {
     private int id=0;
     private String name="Name";
     private String username="UserName";
-    private String website="Website";
+
+    private String email="Email";
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getId() {
         return id;
@@ -36,11 +45,5 @@ public class UserViewModel implements Serializable {
         this.username = username;
     }
 
-    public String getWebsite() {
-        return website;
-    }
 
-    public void setWebsite(String website) {
-        this.website = website;
-    }
 }

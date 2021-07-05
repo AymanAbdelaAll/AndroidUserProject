@@ -152,6 +152,12 @@
                 android:text="@string/user_email" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black" />
+
+        <!--
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -197,11 +203,6 @@
                 android:gravity="center"
                 android:text="@string/user_website" />
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black" />
 
         <TextView
             android:id="@+id/userdetails_text_company"
@@ -412,9 +413,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/black" />
-
-
-
+        -->
 
     </LinearLayout>
 

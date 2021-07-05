@@ -105,6 +105,31 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearlayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                android:weightSum="5"
+                >
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/user_email" />
+
+                <TextView
+                    android:id="@+id/userdetails_text_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:gravity="center"
+                    android:text="@string/user_email" />
+            </LinearLayout>
+            <!--
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -147,8 +172,13 @@
                     android:gravity="center"
                     android:text="@string/user_website" />
             </LinearLayout>
-        </LinearLayout>
 
+            -->
+
+
+
+        </LinearLayout>
+        <!-- the last UI put it if i want change to previous UI
         <View
             android:id="@+id/view2"
             android:layout_width="match_parent"
@@ -372,40 +402,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <View
-            android:id="@+id/view3"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-        <LinearLayout
-            android:id="@+id/linearlayout5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            android:weightSum="5"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-            >
-
-            <TextView
-                android:id="@+id/textView47"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/user_email" />
-
-            <TextView
-                android:id="@+id/userdetails_text_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center"
-                android:text="@string/user_email" />
-        </LinearLayout>
 
         <View
             android:id="@+id/view4"
@@ -415,6 +411,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearlayout5" />
+        -->
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+
+
 
         <ImageButton
             android:id="@+id/userdetails_button_changestatus"
