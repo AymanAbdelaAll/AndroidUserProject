@@ -21,11 +21,10 @@ import io.reactivex.schedulers.Schedulers;
 public class ListUserViewPresenter  {
 
     public interface UserListInterface{
-        void onSuccusssRetreveUser(List<UserViewModel> userViewModels);
-        // TODO : remove public , interface methods are always public
-        public void hideLoading();
-        public void showLoading();
-        public void onErrorRetreveUser();
+        void onSuccusssRetreveUser(List<UserViewModel> userViewModels,List<User> userList);
+        void hideLoading();
+        void showLoading();
+        void onErrorRetreveUser();
     }
 
     ListUserViewPresenter.UserListInterface userListInterface;
@@ -35,51 +34,47 @@ public class ListUserViewPresenter  {
     }
 
     public void loadUsers() {
-         UserClient.getInstance().getUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<User>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        // TODO : always check if 'userListInterface' not null
-                        userListInterface.showLoading();
-                    }
+        if (userListInterface != null) {
+            UserClient.getInstance().getUsers()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<List<User>>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            userListInterface.showLoading();
+                        }
 
-                    @Override
-                    public void onNext(List<User> value) {
-                        List<UserViewModel> userViewModels =transform(value);
-                        // TODO : always check if 'userListInterface' not null
+                        @Override
+                        public void onNext(List<User> value) {
+                            List<UserViewModel> userViewModels = transform(value);
+                            //TODO :is it true to pass the list I transform it to have the certain class form User to UserViewModel
+                            userListInterface.onSuccusssRetreveUser(userViewModels,value);
+                        }
 
-                        userListInterface.onSuccusssRetreveUser(userViewModels);
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            userListInterface.onErrorRetreveUser();
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        // TODO : always check if 'userListInterface' not null
-
-                        userListInterface.onErrorRetreveUser();
-                    }
-
-                    @Override
-                    public void onComplete()
-                    {
-                        // TODO : always check if 'userListInterface' not null
-
-                        userListInterface.hideLoading();
-                    }
-                });
-         }
+                        @Override
+                        public void onComplete() {
+                            userListInterface.hideLoading();
+                        }
+                    });
+        }
+    }
 
     public List<UserViewModel> transform(List<User> users){
         List<UserViewModel> userViewModelViewModels =new ArrayList<>();
         for(User user:users) {
-            //TODO : if one of the 'user' is null , you will be assigning null .so please take care of that
+            if(user!=null){
             UserViewModel userViewModel = new UserViewModel();
             userViewModel.setId(user.getId());
             userViewModel.setName(user.getName());
             userViewModel.setUsername(user.getUsername());
             userViewModel.setWebsite(user.getWebsite());
             userViewModelViewModels.add(userViewModel);
+            }
         }
         return userViewModelViewModels;
     }

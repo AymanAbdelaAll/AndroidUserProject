@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.userproject.POJO.User;
 import com.example.userproject.R;
 import com.example.userproject.UserPresenter.ListUserViewPresenter;
 import com.example.userproject.VM.UserViewModel;
@@ -61,8 +62,8 @@ public class ListUserActivity extends AppCompatActivity implements ListUserViewP
     }
 
     @Override
-    public void onSuccusssRetreveUser(List<UserViewModel> userViewModels) {
-        adapter.setList(userViewModels);
+    public void onSuccusssRetreveUser(List<UserViewModel> userViewModels, List<User>userList) {
+        adapter.setList(userViewModels,userList);
     }
 
     @Override

@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserDetailsActivity extends AppCompatActivity {
-    private static final String KEY_USER="User";
+    public static final String KEY_USER="User";
     public static final String MyPREFERENCES = "ListUserPrefs";
     public static final String FAV_BTN="FAVORITE_BTN";
 
@@ -85,8 +85,8 @@ public class UserDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relative_user_details);
         bindViews();
-        loadPreference();
         loadUser();
+        loadPreference();
     }
 
 
@@ -172,58 +172,25 @@ public class UserDetailsActivity extends AppCompatActivity {
     public void setUserStatus(View view) {
         if (userIdle){
             btChangeStatus.setImageResource(R.drawable.ic_busyuser_star_24);
+            setPreferences();
             userIdle = false;
         } else {
             btChangeStatus.setImageResource(R.drawable.ic_idleuser_star_24);
+            setPreferences();
             userIdle = true;
         }
+
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //TODO : no need , too much work
-        loadPreference();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //TODO : no need , too much work
-        loadPreference();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //TODO : no need
-        setPreferences();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //TODO : no need
-        setPreferences();
-    }
-
-    //TODO : call this after user click on button
     private void setPreferences() {
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        if (userIdle) {
-            editor.putBoolean(UserDetailsActivity.FAV_BTN, false);
-        } else {
-            editor.putBoolean(UserDetailsActivity.FAV_BTN, true);
-        }
-        // TODO : use apply instead of commit
-        editor.commit();
+        editor.putBoolean(userRetriave.getId()+"", userIdle);
+        editor.apply();
     }
 
     private void loadPreference() {
-        // TODO : if i fav one user , it will appear for all users .
-        // please save using user id .
         sharedpreferences= getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        userIdle= sharedpreferences.getBoolean(UserDetailsActivity.FAV_BTN,false);
+        userIdle= sharedpreferences.getBoolean(userRetriave.getId()+"",false);
         setUserStatus(btChangeStatus);
     }
 

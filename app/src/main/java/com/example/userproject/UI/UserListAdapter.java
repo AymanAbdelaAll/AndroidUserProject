@@ -27,6 +27,7 @@ import retrofit2.Response;
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserViewHolder> {
     private static final String TAG ="USERlISTACTIVITY" ;
     private List<UserViewModel> userViewModelList = new ArrayList<>();
+    private List<User> userList=new ArrayList<>();
 
     @NonNull
     @Override
@@ -36,11 +37,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        // TODO : 'userViewModelList.get(position)' refactor as object then call its members
-        holder.tvId.setText(userViewModelList.get(position).getId() + "");
-            holder.tvName.setText(userViewModelList.get(position).getName());
-            holder.tvUserName.setText(userViewModelList.get(position).getUsername());
-            holder.tvWebsite.setText(userViewModelList.get(position).getWebsite());
+        UserViewModel userViewModel = userViewModelList.get(position);
+        holder.tvId.setText(userViewModel.getId() + "");
+            holder.tvName.setText(userViewModel.getName());
+            holder.tvUserName.setText(userViewModel.getUsername());
+            holder.tvWebsite.setText(userViewModel.getWebsite());
 
             holder.llShowUser.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -49,7 +50,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
                     // TODO : what is this!?!?!?!??!?!?!
                     // we already talked about you already have the object !!!!!!!!!!
                     // no need to call api , just pass the user object
-                    UserClient.getInstance().getUser(userViewModelList.get(position).getId()).enqueue(new Callback<User>() {
+                    User user = userList.get(position);
+                    UserDetailsActivity.start(v.getContext(),user);
+                    /*
+                    UserClient.getInstance().getUser(userViewModel.getId()).enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             User user = response.body();
@@ -60,7 +64,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
                         public void onFailure(Call<User> call, Throwable t) {
                             Log.d(TAG, "The User Doesnt Exist");
                         }
-                    });
+                    });*/
                 }
             });
     }
@@ -71,8 +75,9 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
         return userViewModelList.size();
     }
 
-    public void setList(List<UserViewModel> userList) {
-        this.userViewModelList = userList;
+    public void setList(List<UserViewModel> userViewList,List<User> usersList) {
+        this.userViewModelList = userViewList;
+        this.userList=usersList;
         notifyDataSetChanged();
     }
 
