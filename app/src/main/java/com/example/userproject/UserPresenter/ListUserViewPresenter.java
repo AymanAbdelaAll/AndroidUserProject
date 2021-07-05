@@ -22,6 +22,7 @@ public class ListUserViewPresenter  {
 
     public interface UserListInterface{
         void onSuccusssRetreveUser(List<UserViewModel> userViewModels);
+        // TODO : remove public , interface methods are always public
         public void hideLoading();
         public void showLoading();
         public void onErrorRetreveUser();
@@ -40,23 +41,30 @@ public class ListUserViewPresenter  {
                 .subscribe(new Observer<List<User>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
+                        // TODO : always check if 'userListInterface' not null
                         userListInterface.showLoading();
                     }
 
                     @Override
                     public void onNext(List<User> value) {
                         List<UserViewModel> userViewModels =transform(value);
+                        // TODO : always check if 'userListInterface' not null
+
                         userListInterface.onSuccusssRetreveUser(userViewModels);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                       userListInterface.onErrorRetreveUser();
+                        // TODO : always check if 'userListInterface' not null
+
+                        userListInterface.onErrorRetreveUser();
                     }
 
                     @Override
                     public void onComplete()
                     {
+                        // TODO : always check if 'userListInterface' not null
+
                         userListInterface.hideLoading();
                     }
                 });
@@ -65,6 +73,7 @@ public class ListUserViewPresenter  {
     public List<UserViewModel> transform(List<User> users){
         List<UserViewModel> userViewModelViewModels =new ArrayList<>();
         for(User user:users) {
+            //TODO : if one of the 'user' is null , you will be assigning null .so please take care of that
             UserViewModel userViewModel = new UserViewModel();
             userViewModel.setId(user.getId());
             userViewModel.setName(user.getName());

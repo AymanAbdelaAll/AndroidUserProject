@@ -182,27 +182,32 @@ public class UserDetailsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //TODO : no need , too much work
         loadPreference();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        //TODO : no need , too much work
         loadPreference();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        //TODO : no need
         setPreferences();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //TODO : no need
         setPreferences();
     }
 
+    //TODO : call this after user click on button
     private void setPreferences() {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if (userIdle) {
@@ -210,10 +215,13 @@ public class UserDetailsActivity extends AppCompatActivity {
         } else {
             editor.putBoolean(UserDetailsActivity.FAV_BTN, true);
         }
+        // TODO : use apply instead of commit
         editor.commit();
     }
 
     private void loadPreference() {
+        // TODO : if i fav one user , it will appear for all users .
+        // please save using user id .
         sharedpreferences= getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         userIdle= sharedpreferences.getBoolean(UserDetailsActivity.FAV_BTN,false);
         setUserStatus(btChangeStatus);

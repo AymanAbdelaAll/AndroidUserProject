@@ -36,7 +36,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-            holder.tvId.setText(userViewModelList.get(position).getId() + "");
+        // TODO : 'userViewModelList.get(position)' refactor as object then call its members
+        holder.tvId.setText(userViewModelList.get(position).getId() + "");
             holder.tvName.setText(userViewModelList.get(position).getName());
             holder.tvUserName.setText(userViewModelList.get(position).getUsername());
             holder.tvWebsite.setText(userViewModelList.get(position).getWebsite());
@@ -44,6 +45,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
             holder.llShowUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    // TODO : what is this!?!?!?!??!?!?!
+                    // we already talked about you already have the object !!!!!!!!!!
+                    // no need to call api , just pass the user object
                     UserClient.getInstance().getUser(userViewModelList.get(position).getId()).enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
