@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,11 +17,16 @@ import android.widget.Toast;
 
 import com.example.userproject.POJO.Address;
 import com.example.userproject.POJO.Company;
+import com.example.userproject.POJO.FavoriteEvent;
 import com.example.userproject.POJO.Geo;
 import com.example.userproject.POJO.GeoAddress;
 import com.example.userproject.POJO.User;
 import com.example.userproject.R;
 import com.example.userproject.VM.UserViewModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,7 +75,6 @@ public class UserDetailsActivity extends AppCompatActivity {
     RelativeLayout rlLoading;
 
     private UserViewModel userRetriave;
-    boolean userIdle;
     SharedPreferences sharedpreferences;
 
 
@@ -78,6 +83,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         starter.putExtra(KEY_USER, userViewModel);
         context.startActivity(starter);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,30 +175,58 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     public void setUserStatus(View view) {
-        if (userIdle){
+        if(btChangeStatus.getTag().equals("idleuser")){
             btChangeStatus.setImageResource(R.drawable.ic_busyuser_star_24);
+            btChangeStatus.setTag("busyuser");
             setPreferences();
-            userIdle = false;
+
         } else {
             btChangeStatus.setImageResource(R.drawable.ic_idleuser_star_24);
+            btChangeStatus.setTag("idleuser");
             setPreferences();
-            userIdle = true;
         }
 
     }
 
     private void setPreferences() {
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putBoolean(userRetriave.getId()+"", userIdle);
+        editor.putString(userRetriave.getId()+"", btChangeStatus.getTag()+"");
         editor.apply();
     }
 
     private void loadPreference() {
         sharedpreferences= getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        userIdle= sharedpreferences.getBoolean(userRetriave.getId()+"",false);
+        String userIdle= sharedpreferences.getString(userRetriave.getId()+"","idleuser");
+        setBtFavoriteTag(userIdle);
+
         setUserStatus(btChangeStatus);
     }
 
+    private void setBtFavoriteTag(String userIdle) {
+        if (userIdle.equals("idleuser")){
+            btChangeStatus.setTag("busyuser");
+        }else {
+            btChangeStatus.setTag("idleuser");
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onChangedUserStatus(FavoriteEvent favoriteEvent){
+        String userIdle=favoriteEvent.userStatus;
+        setBtFavoriteTag(userIdle);
+        setUserStatus(btChangeStatus);
+    }
 }
 
 

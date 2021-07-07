@@ -60,4 +60,7 @@ dependencies {
 
     implementation 'io.reactivex.rxjava3:rxjava:3.0.13'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
 }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:padding="3dp"
     app:cardCornerRadius="15dp">
 
     <LinearLayout
@@ -11,35 +12,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="8">
+        android:padding="3dp"
+        android:weightSum="6">
 
         <TextView
             android:id="@+id/userItem_id"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="id" />
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="ID"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/userItem_name"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Name" />
+            android:layout_weight="4"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/userItem_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="UserName" />
+            <TextView
+                android:id="@+id/userItem_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="2"
+                android:text="Name"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/userItem_email"
+            <TextView
+                android:id="@+id/userItem_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="2"
+                android:text="Email" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/useritem_button_changestatus"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Email" />
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundcorner"
+            android:src="@drawable/ic_idleuser_star_24" />
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
