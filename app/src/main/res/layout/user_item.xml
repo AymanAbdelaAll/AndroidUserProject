@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:padding="3dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="15dp">
 
     <LinearLayout
@@ -15,21 +15,11 @@
         android:padding="3dp"
         android:weightSum="6">
 
-        <TextView
-            android:id="@+id/userItem_id"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="ID"
-            android:textStyle="bold" />
-
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:orientation="vertical">
 
             <TextView

@@ -35,6 +35,7 @@ public class ListUserViewPresenter  {
 
     public void loadUsers() {
         if (userListInterface != null) {
+            System.out.println("hello");
             UserClient.getInstance().getUsers()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

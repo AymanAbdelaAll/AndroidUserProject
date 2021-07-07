@@ -39,7 +39,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         UserViewModel userViewModel = userViewModelList.get(position);
-            holder.tvId.setText(userViewModel.getId() + "");
             holder.tvName.setText(userViewModel.getName());
             holder.tvEmail.setText(userViewModel.getEmail());
             ImageButton ibFavorite = holder.ibFavorite;
@@ -120,12 +119,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView tvId,tvName,tvEmail;
+        TextView tvName,tvEmail;
         ImageButton ibFavorite;
         LinearLayout llShowUser;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvId=itemView.findViewById(R.id.userItem_id);
             tvName=itemView.findViewById(R.id.userItem_name);
             tvEmail=itemView.findViewById(R.id.userItem_email);
             ibFavorite=itemView.findViewById(R.id.useritem_button_changestatus);
