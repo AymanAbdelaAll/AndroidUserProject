@@ -93,7 +93,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
             ibFavorite.setTag("idleuser");
             ibFavorite.setImageResource(R.drawable.ic_idleuser_star_24);
             setPreferences(userViewModel.getId(),ibFavorite);
-
         }else{
             if(ibFavorite.getTag().equals("idleuser")){
                 ibFavorite.setTag("busyuser");

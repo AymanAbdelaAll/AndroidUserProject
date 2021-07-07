@@ -218,6 +218,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
