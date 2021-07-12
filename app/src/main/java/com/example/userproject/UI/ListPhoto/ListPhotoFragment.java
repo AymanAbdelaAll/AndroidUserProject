@@ -20,9 +20,14 @@ import com.example.userproject.VM.PhotoViewModel;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class ListPhotoFragment extends Fragment  implements ListPhotoPresenter.PhotoListInterface{
+    @BindView(R.id.listphoto_recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.listuser_loading_container)
     RelativeLayout rlLodaingContainer;
     PhotoListAdapter adapter;
     ListPhotoPresenter presenter;
@@ -36,8 +41,7 @@ public class ListPhotoFragment extends Fragment  implements ListPhotoPresenter.P
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_list_photo , container,false);
-        recyclerView=view.findViewById(R.id.listphoto_recyclerView);
-        rlLodaingContainer=view.findViewById(R.id.listuser_loading_container);
+        ButterKnife.bind(this,view);
         adapter=getPhotoAdapter();
         presenter = new ListPhotoPresenter(this);
         presenter.loadPhotos();

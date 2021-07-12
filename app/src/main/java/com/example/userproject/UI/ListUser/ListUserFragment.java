@@ -20,6 +20,7 @@ import com.example.userproject.VM.UserViewModel;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,7 +33,9 @@ import android.widget.Toast;
 import org.jetbrains.annotations.NotNull;
 
 public class ListUserFragment extends Fragment implements ListUserViewPresenter.UserListInterface {
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.listuser_loading_container)
     RelativeLayout rlLodaingContainer;
     UserListAdapter adapter;
     ListUserViewPresenter presenter;
@@ -45,8 +48,8 @@ public class ListUserFragment extends Fragment implements ListUserViewPresenter.
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_list_user , container,false);
-        loadViews(view);
+        View view =inflater.inflate(R.layout.fragment_list_user, container,false);
+        ButterKnife.bind(this,view);
         adapter = getUserListAdapter();
         presenter = new ListUserViewPresenter(this);
         presenter.loadUsers();
