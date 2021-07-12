@@ -10,7 +10,6 @@ public class UserViewModel implements Serializable {
     private int id=0;
     private String name="Name";
     private String username="UserName";
-
     private String email="Email";
 
     public String getEmail() {

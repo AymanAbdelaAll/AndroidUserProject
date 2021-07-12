@@ -1,13 +1,8 @@
 package com.example.userproject.UserPresenter;
 
-import android.view.View;
-import android.widget.Toast;
-
-import com.example.userproject.Networking.UserClient;
+import com.example.userproject.Networking.User.UserClient;
 import com.example.userproject.POJO.User;
 import com.example.userproject.VM.UserViewModel;
-import com.example.userproject.R;
-import com.example.userproject.UI.UserListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ListUserViewPresenter  {
 
     public interface UserListInterface{
-        void onSuccusssRetreveUser(List<UserViewModel> userViewModels,List<User> userList);
+        void onSuccusssRetreveUser(List<UserViewModel> userViewModels);
         void hideLoading();
         void showLoading();
         void onErrorRetreveUser();
@@ -29,13 +24,13 @@ public class ListUserViewPresenter  {
 
     ListUserViewPresenter.UserListInterface userListInterface;
 
+
     public ListUserViewPresenter( ListUserViewPresenter.UserListInterface userListInterface) {
         this.userListInterface = userListInterface;
     }
 
+
     public void loadUsers() {
-        if (userListInterface != null) {
-            System.out.println("hello");
             UserClient.getInstance().getUsers()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -48,7 +43,7 @@ public class ListUserViewPresenter  {
                         @Override
                         public void onNext(List<User> value) {
                             List<UserViewModel> userViewModels = transform(value);
-                            userListInterface.onSuccusssRetreveUser(userViewModels,value);
+                            userListInterface.onSuccusssRetreveUser(userViewModels);
                         }
 
                         @Override
@@ -62,7 +57,7 @@ public class ListUserViewPresenter  {
                         }
                     });
         }
-    }
+
 
     public List<UserViewModel> transform(List<User> users){
         List<UserViewModel> userViewModelViewModels =new ArrayList<>();

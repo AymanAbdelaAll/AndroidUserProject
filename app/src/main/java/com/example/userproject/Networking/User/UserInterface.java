@@ -1,4 +1,4 @@
-package com.example.userproject.Networking;
+package com.example.userproject.Networking.User;
 
 import com.example.userproject.POJO.User;
 

@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/imageview"
-            android:layout_width="104dp"
-            android:layout_height="72dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_below="@+id/userdetails_button_changestatus"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
@@ -49,7 +49,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/user_id" />
+                    android:gravity="center"
+                    android:text="@string/user_id"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/userdetails_text_id"
@@ -75,7 +77,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/user_name" />
+                    android:gravity="center"
+                    android:text="@string/user_name"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/userdetails_text_name"
@@ -97,7 +101,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/user_username" />
+                    android:gravity="center"
+                    android:text="@string/user_username"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/userdetails_text_username"
@@ -168,7 +174,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/user_email" />
+                    android:gravity="center"
+                    android:text="@string/user_email"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/userdetails_text_email"
@@ -437,14 +445,14 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/loading_container"
+        android:id="@+id/listuser_loading_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true">
 
         <ProgressBar
-            android:id="@+id/userdetails_progress_loadingbar"
+            android:id="@+id/listphoto_progress_loadingbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"

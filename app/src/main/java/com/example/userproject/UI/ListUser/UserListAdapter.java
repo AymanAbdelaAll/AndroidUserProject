@@ -1,4 +1,4 @@
-package com.example.userproject.UI;
+package com.example.userproject.UI.ListUser;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,11 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.userproject.POJO.FavoriteEvent;
 import com.example.userproject.R;
+import com.example.userproject.UI.UserDetailsActivity;
 import com.example.userproject.VM.UserViewModel;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

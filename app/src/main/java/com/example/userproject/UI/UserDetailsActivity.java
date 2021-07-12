@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,12 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.userproject.POJO.Address;
-import com.example.userproject.POJO.Company;
 import com.example.userproject.POJO.FavoriteEvent;
-import com.example.userproject.POJO.Geo;
-import com.example.userproject.POJO.GeoAddress;
-import com.example.userproject.POJO.User;
 import com.example.userproject.R;
 import com.example.userproject.VM.UserViewModel;
 
@@ -71,7 +65,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     */
     @BindView(R.id.userdetails_button_changestatus)
     ImageButton btChangeStatus;
-    @BindView(R.id.loading_container)
+    @BindView(R.id.listuser_loading_container)
     RelativeLayout rlLoading;
 
     private UserViewModel userRetriave;

@@ -1,6 +1,7 @@
-package com.example.userproject.Networking;
+package com.example.userproject.Networking.Photo;
 
-import com.example.userproject.POJO.User;
+
+import com.example.userproject.VM.PhotoViewModel;
 
 import java.util.List;
 
@@ -10,31 +11,33 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
-public class UserClient {
+public class PhotoClient {
     private final String URL="https://jsonplaceholder.typicode.com/";
-    private UserInterface userInterface;
-    private static UserClient instance ;
+    private PhotoInterface photoInterface;
+    private static PhotoClient instance ;
 
-    public UserClient() {
+    public PhotoClient() {
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
-        userInterface=retrofit.create(UserInterface.class);
-    }
-    public static UserClient getInstance(){
-        if (instance ==null)
-            instance =new UserClient();
-        return instance ;
-    }
-    public Call<User> getUser(int id){
-        return getInstance ().userInterface.getUser(id);
+        photoInterface=retrofit.create(PhotoInterface.class);
     }
 
-    public Observable<List<User>> getUsers(){
-        return getInstance ().userInterface.getUsers();
+    public static PhotoClient getInstance(){
+        if (instance ==null)
+            instance =new PhotoClient();
+        return instance ;
     }
+
+    public Observable<List<PhotoViewModel>> getPhotos(){
+        return getInstance ().photoInterface.getPhotos();
+    }
+
+    public Call<PhotoViewModel> getPhoto(int id){
+        return getInstance ().photoInterface.getPhoto(id);
+    }
+
 }
