@@ -14,5 +14,5 @@ public interface UserInterface {
     @GET("users")
     public Observable<List<User>> getUsers();
     @GET("users/{id}")
-    public Call<User> getUser(@Path("id") int id);
+    public Observable<User> getUser(@Path("id") int id);
 }

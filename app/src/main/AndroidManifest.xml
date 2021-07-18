@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.userproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,11 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UserProject">
-        <activity android:name=".UI.PhotoDetailsActivity"
-            android:parentActivityName=".UI.ListView.ListViewActivity"></activity>
         <activity
-            android:name=".UI.UserDetailsActivity"
+            android:name=".UI.PhotoDetailsActivity"
             android:parentActivityName=".UI.ListView.ListViewActivity"></activity>
+
+
+        <activity
+        android:name=".UI.UserDetailsActivity"
+            android:parentActivityName=".UI.ListView.ListViewActivity">
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+
+                    android:host="www.userdetails.com" />
+                <data
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".UI.ListView.ListViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -30,7 +30,7 @@ public class UserClient {
             instance =new UserClient();
         return instance ;
     }
-    public Call<User> getUser(int id){
+    public Observable<User> getUser(int id){
         return getInstance ().userInterface.getUser(id);
     }
 

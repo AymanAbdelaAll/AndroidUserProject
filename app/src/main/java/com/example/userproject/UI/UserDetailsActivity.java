@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.InetAddresses;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.userproject.Networking.User.UserClient;
 import com.example.userproject.POJO.FavoriteEvent;
+import com.example.userproject.POJO.User;
 import com.example.userproject.R;
 import com.example.userproject.VM.UserViewModel;
 
@@ -22,12 +26,26 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserDetailsActivity extends AppCompatActivity {
     public static final String KEY_USER="User";
+    public static final String KEY_USER_ID="id";
+    public static final String KEY_USER_NAME="name";
+    public static final String KEY_USER_USERNAME="username";
+    public static final String KEY_USER_EMAIL="email";
     public static final String MyPREFERENCES = "ListUserPrefs";
     public static final String FAV_BTN="FAVORITE_BTN";
 
@@ -41,28 +59,6 @@ public class UserDetailsActivity extends AppCompatActivity {
     @BindView(R.id.userdetails_text_email)
     TextView tvEmail;
 
-
-    /*@BindView(R.id.userdetails_text_address_street)
-    TextView tvAddressStreet;
-    @BindView(R.id.userdetails_text_address_suite)
-    TextView tvAddressSuite;
-    @BindView(R.id.userdetails_text_address_city)
-    TextView tvAddressCity;
-    @BindView(R.id.userdetails_text_address_zipcode)
-    TextView tvAddressZipcode;
-
-    @BindView(R.id.userdetails_text_company_name)
-    TextView tvCompanyName;
-    @BindView(R.id.userdetails_text_company_catchphrase)
-    TextView tvCompanyCatchphrase;
-    @BindView(R.id.userdetails_text_company_bs)
-    TextView tvCompanyBs;
-
-    @BindView(R.id.userdetails_text_address_geo)
-    TextView tvAddressGeo;
-    @BindView(R.id.userdetails_text_address_geoView)
-    TextView tvAddressGeoView;
-    */
     @BindView(R.id.userdetails_button_changestatus)
     ImageButton btChangeStatus;
     @BindView(R.id.listuser_loading_container)
@@ -84,8 +80,34 @@ public class UserDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_linear_user_details);
         bindViews();
+        getIntentFromLink();
         loadUser();
         loadPreference();
+
+
+
+    }
+
+    private void getIntentFromLink() {
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
+        System.out.println(appLinkData);
+        if (appLinkData!=null){
+            Set<String> queryParameterNames =appLinkData.getQueryParameterNames();
+
+            String userId=appLinkData.getQueryParameter(UserDetailsActivity.KEY_USER_ID);
+            String userName=appLinkData.getQueryParameter(UserDetailsActivity.KEY_USER_NAME);
+            String userUserName=appLinkData.getQueryParameter(UserDetailsActivity.KEY_USER_USERNAME);
+            String userEmail=appLinkData.getQueryParameter(UserDetailsActivity.KEY_USER_EMAIL);
+
+            userRetriave = new UserViewModel();
+            userRetriave.setId(Integer.parseInt(userId));
+            userRetriave.setName(userName);
+            userRetriave.setUsername(userUserName);
+            userRetriave.setEmail(userEmail);
+
+        }
     }
 
 
@@ -94,8 +116,11 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     private void loadUser() {
-        //here you can change the Id of user you want
-        UserViewModel user = (UserViewModel) getIntent().getSerializableExtra(KEY_USER);
+        UserViewModel user;
+        if (userRetriave==null)
+         user = (UserViewModel) getIntent().getSerializableExtra(KEY_USER);
+        else
+            user=userRetriave;
         hideLoading();
         getUserDetails(user);
     }
@@ -108,19 +133,6 @@ public class UserDetailsActivity extends AppCompatActivity {
         if (userRespose != null) {
             userRetriave = userRespose;
             setUserViews(userRespose);
-            /*
-            Company userCompany = userRespose.getCompany();
-            setUserCompanyViews(userCompany);
-
-            Address userAddress = userRespose.getAddress();
-            setUserAddressViews(userAddress);
-
-            setAddressGeoViews(userAddress);
-        } else {
-            String error_msg=getString(R.string.network_error_msg);
-            Toast.makeText(this, error_msg, Toast.LENGTH_LONG).show();
-
-            */
         }
 
     }
@@ -192,7 +204,6 @@ public class UserDetailsActivity extends AppCompatActivity {
         sharedpreferences= getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String userIdle= sharedpreferences.getString(userRetriave.getId()+"","idleuser");
         setBtFavoriteTag(userIdle);
-
         setUserStatus(btChangeStatus);
     }
 
@@ -221,6 +232,24 @@ public class UserDetailsActivity extends AppCompatActivity {
         String userIdle=favoriteEvent.userStatus;
         setBtFavoriteTag(userIdle);
         setUserStatus(btChangeStatus);
+    }
+
+    public void getUserLink(View view) {
+        String host="http://www.userdetails.com/";
+        String userId=userRetriave.getId()+"";
+        String userName=userRetriave.getName();
+        String userUserName=userRetriave.getUsername();
+        String userEmail=userRetriave.getEmail();
+        String url=host;
+
+        Uri uri=Uri.parse(host).buildUpon().
+                appendQueryParameter(UserDetailsActivity.KEY_USER_ID,userId).
+                appendQueryParameter(UserDetailsActivity.KEY_USER_NAME,userName).
+                appendQueryParameter(UserDetailsActivity.KEY_USER_USERNAME,userUserName).
+                appendQueryParameter(UserDetailsActivity.KEY_USER_EMAIL,userEmail).
+                build();
+        TextView tvgetLink=findViewById(R.id.userdetails_palintext_userlink_url);
+        tvgetLink.setText(uri.toString()+"");
     }
 }
 
