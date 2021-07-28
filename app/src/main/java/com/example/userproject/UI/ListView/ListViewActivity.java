@@ -12,10 +12,14 @@ import com.example.userproject.UI.ListPhoto.ListPhotoFragment;
 import com.example.userproject.UI.ListUser.ListUserFragment;
 import com.google.android.material.tabs.TabLayout;
 
+import io.branch.referral.Branch;
+
 public class ListViewActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

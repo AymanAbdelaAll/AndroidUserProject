@@ -21,18 +21,27 @@
         android:name=".UI.UserDetailsActivity"
             android:parentActivityName=".UI.ListView.ListViewActivity">
 
-            <intent-filter android:autoVerify="true">
+            <intent-filter>
+                <data android:scheme="userdetails" android:host="open" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:scheme="http"
-
-                    android:host="www.userdetails.com" />
-                <data
-                    android:scheme="https"/>
             </intent-filter>
+
+
+            <!-- Branch App Links (optional)
+            -->
+            <intent-filter android:autoVerify="true" >
+
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="userdetails.app.link" />
+                <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website.  -->
+                <data android:scheme="https" android:host="userdetails-alternate.app.link"/>
+            </intent-filter>
+
+
         </activity>
         <activity android:name=".UI.ListView.ListViewActivity">
             <intent-filter>
@@ -41,6 +50,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Branch init -->
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_on8rmwXzPtKaug7btAlfHapesyhpp38i" />
+        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="secret_live_hTgSyCJ7Jnt4rGww9F87j1jdq6ERaWcZ" />
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />     <!-- Set to true to use Branch_Test_Key (useful when simulating installs and/or switching between debug and production flavors) -->
     </application>
 
 </manifest>
