@@ -26,6 +26,7 @@ import com.google.gson.JsonParser;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Set;
@@ -79,61 +80,45 @@ public class UserDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_linear_user_details);
         loadBranch();
-
         bindViews();
-        getIntentFromLink();
         loadUser();
         loadPreference();
-
-
-
     }
 
     private void loadBranch() {
-        // Branch logging for debugging
         Branch.enableLogging();
 
-        // Branch object initialization
         Branch.getAutoInstance(this);
-
+        Branch.sessionBuilder(this).withCallback(branchReferralInitListener).reInit();
 
     }
+
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        // if activity is in foreground (or in backstack but partially visible) launching the same
-        // activity will skip onStart, handle this case with reInitSession
+    protected void onResume() {
+        super.onResume();
         Branch.sessionBuilder(this).withCallback(branchReferralInitListener).reInit();
     }
+
     private Branch.BranchReferralInitListener branchReferralInitListener = new Branch.BranchReferralInitListener() {
         @Override
         public void onInitFinished(JSONObject linkProperties, BranchError error) {
+            Intent intent = getIntent();
+            Uri uri = intent.getData();
+            if (uri != null) {
+                String userId = uri.getQueryParameter(UserDetailsActivity.KEY_USER_ID);
+                String userName = uri.getQueryParameter(UserDetailsActivity.KEY_USER_NAME);
+                String userUserName = uri.getQueryParameter(UserDetailsActivity.KEY_USER_USERNAME);
+                String userEmail = uri.getQueryParameter(UserDetailsActivity.KEY_USER_EMAIL);
 
+                userRetriave = new UserViewModel();
+                userRetriave.setId(Integer.parseInt(userId));
+                userRetriave.setName(userName);
+                userRetriave.setUsername(userUserName);
+                userRetriave.setEmail(userEmail);
+            }
         }
     };
 
-
-    /*
-
-    private Branch.BranchReferralInitListener branchReferralInitListener = new Branch.BranchReferralInitListener() {
-        @Override
-        public void onInitFinished(JSONObject linkProperties, BranchError error) {
-            if (error == null) {
-                Log.i("BranchDeepLink", "" + linkProperties.toString());
-                try {
-                    Gson gson = new Gson();
-                    JsonParser parser = new JsonParser();
-                    JsonElement json = parser.parse(linkProperties.toString());
-                    userRetriave = gson.fromJson(json, UserViewModel.class);
-                    //ShareScreenDataModel shareScreenDataModel = gson.fromJson(json, ShareScreenDataModel.class);
-                } catch (Exception e) {
-
-                }
-            }
-
-        }
-    };*/
 
 
     private void getIntentFromLink() {
@@ -188,7 +173,6 @@ public class UserDetailsActivity extends AppCompatActivity {
             userRetriave = userRespose;
             setUserViews(userRespose);
         }
-
     }
 
     /*private void setAddressGeoViews(Address userAddress) {
@@ -240,13 +224,11 @@ public class UserDetailsActivity extends AppCompatActivity {
             btChangeStatus.setImageResource(R.drawable.ic_busyuser_star_24);
             btChangeStatus.setTag("busyuser");
             setPreferences();
-
         } else {
             btChangeStatus.setImageResource(R.drawable.ic_idleuser_star_24);
             btChangeStatus.setTag("idleuser");
             setPreferences();
         }
-
     }
 
     private void setPreferences() {
@@ -257,6 +239,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     private void loadPreference() {
         sharedpreferences= getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        System.out.println(userRetriave);
         String userIdle= sharedpreferences.getString(userRetriave.getId()+"","idleuser");
         setBtFavoriteTag(userIdle);
         setUserStatus(btChangeStatus);
@@ -278,9 +261,6 @@ public class UserDetailsActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
     }
 
-
-
-
     @Override
     protected void onStop() {
         EventBus.getDefault().unregister(this);
@@ -296,22 +276,26 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     public void getUserLink(View view) {
 
-        String host="http://userdetails.app.link";
-        String userId=userRetriave.getId()+"";
-        String userName=userRetriave.getName();
-        String userUserName=userRetriave.getUsername();
-        String userEmail=userRetriave.getEmail();
-        String url=host;
+        String host = "http://userdetailsapp.app.link";
+        String userId = userRetriave.getId() + "";
+        String userName = userRetriave.getName();
+        String userUserName = userRetriave.getUsername();
+        String userEmail = userRetriave.getEmail();
+        String url = host;
 
-        Uri uri=Uri.parse(host).buildUpon().
-                appendQueryParameter(UserDetailsActivity.KEY_USER_ID,userId).
-                appendQueryParameter(UserDetailsActivity.KEY_USER_NAME,userName).
-                appendQueryParameter(UserDetailsActivity.KEY_USER_USERNAME,userUserName).
-                appendQueryParameter(UserDetailsActivity.KEY_USER_EMAIL,userEmail).
+        Uri uri = Uri.parse(host).buildUpon().
+                appendQueryParameter(UserDetailsActivity.KEY_USER_ID, userId).
+                appendQueryParameter(UserDetailsActivity.KEY_USER_NAME, userName).
+                appendQueryParameter(UserDetailsActivity.KEY_USER_USERNAME, userUserName).
+                appendQueryParameter(UserDetailsActivity.KEY_USER_EMAIL, userEmail).
                 build();
-        TextView tvgetLink=findViewById(R.id.userdetails_palintext_userlink_url);
-        tvgetLink.setText(uri.toString()+"");
-    }
+
+          Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+
 }
 
 
